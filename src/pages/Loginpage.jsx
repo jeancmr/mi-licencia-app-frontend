@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import InputForm from '../components/shared/InputForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 const Loginpage = () => {
   const {
@@ -8,10 +10,18 @@ const Loginpage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { signIn, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+    signIn(data);
   });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-500 to-purple-500">
@@ -22,19 +32,21 @@ const Loginpage = () => {
             type="email"
             placeholder="Correo"
             register={register}
-            name="email"
+            name="correo"
             required={true}
-            error={errors.email}
+            error={errors.correo}
           />
           <InputForm
             type="password"
             placeholder="Contraseña"
             register={register}
-            name="password"
+            name="contrasena"
             required={true}
-            error={errors.password}
+            error={errors.contrasena}
           />
-          <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4">Iniciar sesión</button>
+          <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
+            Iniciar sesión
+          </button>
         </form>
         <p className="">
           ¿No tienes cuenta?
