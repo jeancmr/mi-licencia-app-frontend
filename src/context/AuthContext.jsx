@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { login } from '../api/auth';
+import { rolePermissions } from '../utils/permissions';
 
 export const AuthContext = createContext();
 
@@ -19,7 +20,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await login(userData);
       console.log('Usuario:', res);
-      setUser(res);
+      const permissions = rolePermissions[res.user.rol] || [];
+      setUser({ ...res, permissions });
       setIsAuthenticated(true);
     } catch (error) {
       console.error(error);

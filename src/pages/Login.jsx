@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
 
-const Loginpage = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ const Loginpage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/home');
+      navigate('/dashboard');
     }
   }, [isAuthenticated]);
 
@@ -58,4 +58,4 @@ const Loginpage = () => {
     </div>
   );
 };
-export default Loginpage;
+export default Login;
