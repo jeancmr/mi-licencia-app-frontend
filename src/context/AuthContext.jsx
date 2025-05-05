@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { login, verifyToken } from '../api/auth';
+import { login, verifyToken, logout } from '../api/auth';
 import { rolePermissions } from '../utils/permissions';
-import { set } from 'react-hook-form';
 
 export const AuthContext = createContext();
 
@@ -48,12 +47,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signOut = async () => {
+    const res = await logout();
+    console.log('Logout response:', res);
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
   useEffect(() => {
     verify();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, loading, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, loading, user }}>
       {children}
     </AuthContext.Provider>
   );

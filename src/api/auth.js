@@ -23,6 +23,29 @@ export const login = async (userData) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    const response = await fetch(`${API_URL}/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    console.log('Logout response:', data);
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Ocurrió un error al cerrar sesión');
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message || 'Ocurrió un error al cerrar sesión');
+  }
+};
+
 export const verifyToken = async () => {
   try {
     const response = await fetch(`${API_URL}/verify`, {
