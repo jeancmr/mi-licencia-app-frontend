@@ -1,6 +1,7 @@
-import { createContext, useContext, useState } from 'react';
-import { login } from '../api/auth';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { login, verifyToken } from '../api/auth';
 import { rolePermissions } from '../utils/permissions';
+import { set } from 'react-hook-form';
 
 export const AuthContext = createContext();
 
@@ -15,6 +16,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const signIn = async (userData) => {
     try {
@@ -25,12 +27,33 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     } catch (error) {
       console.error(error);
+      setUser(null);
       setIsAuthenticated(false);
     }
   };
 
+  const verify = async () => {
+    try {
+      const res = await verifyToken();
+      console.log('Usuario verificado:', res);
+      const permissions = rolePermissions[res.user.rol] || [];
+      setUser({ ...res, permissions });
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Error al verificar el token:', error);
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    verify();
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ signIn, isAuthenticated, loading, user }}>
       {children}
     </AuthContext.Provider>
   );

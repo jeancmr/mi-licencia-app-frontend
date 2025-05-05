@@ -22,3 +22,25 @@ export const login = async (userData) => {
     throw new Error(error.message || 'Ocurrió un error al iniciar sesión');
   }
 };
+
+export const verifyToken = async () => {
+  try {
+    const response = await fetch(`${API_URL}/verify`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Ocurrió un error');
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message || 'Ocurrió un error al verificar el token');
+  }
+};
