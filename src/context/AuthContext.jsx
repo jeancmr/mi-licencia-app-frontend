@@ -20,9 +20,7 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (userData) => {
     try {
       const res = await login(userData);
-      console.log('Usuario:', res);
       const permissions = rolePermissions[res.user.rol] || [];
-      console.log('Permisos:', permissions);
 
       setUser({ ...res, permissions });
       setIsAuthenticated(true);
