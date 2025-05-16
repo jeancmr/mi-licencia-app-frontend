@@ -15,6 +15,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const signIn = async (userData) => {
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
       setUser(null);
       setIsAuthenticated(false);
+      setErrors(error.message.split('|'));
     }
   };
 
@@ -58,8 +60,17 @@ export const AuthProvider = ({ children }) => {
     verify();
   }, []);
 
+  useEffect(()=>{
+   if(errors.length > 0){
+    const timer = setTimeout(()=>{
+      setErrors([]);
+    }, 5000);
+    return ()=> clearTimeout(timer);
+   }
+  },[errors])
+
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, loading, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, loading, user,errors }}>
       {children}
     </AuthContext.Provider>
   );

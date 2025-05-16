@@ -10,7 +10,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signIn, isAuthenticated } = useAuth();
+  const { signIn, isAuthenticated, errors: loginErrors } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
@@ -26,6 +26,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-500 to-purple-500">
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+    
         <h1 className="text-2xl font-bold">Inicio de sesión</h1>
         <form onSubmit={onSubmit}>
           <InputForm
@@ -44,6 +45,11 @@ const Login = () => {
             required={true}
             error={errors.contrasena}
           />
+            {loginErrors?.map((error, index) => (
+          <p key={index} className="text-red-500">
+            {error}
+          </p>
+        ))}
           <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
             Iniciar sesión
           </button>
