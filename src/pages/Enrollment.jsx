@@ -9,6 +9,10 @@ const Enrollment = () => {
   const { user } = useAuth();
   const [showClasses, setShowClasses] = useState(false);
   const [enrollments, setEnrollments] = useState([]);
+  const [alertMessage, setAlertMessage] = useState({
+    message: '',
+    color: '',
+  });
 
   const {
     register,
@@ -31,9 +35,21 @@ const Enrollment = () => {
         body: JSON.stringify(enrollmentData),
       });
       const data = await response.json();
+      if(!response.ok){
+        throw new Error([data.message || 'Error al inscribir']);
+      }
       console.log('Inscripción exitosa:', data);
+      setAlertMessage({
+        message: 'Inscripción exitosa',
+        color: 'green',
+      });
+      
     } catch (error) {
       console.error('Error al inscribir:', error);
+      setAlertMessage({
+        message: error.message,
+        color: 'red',
+      });  
     }
   });
 
@@ -55,6 +71,10 @@ const Enrollment = () => {
       setClases(data);
     } catch (error) {
       console.error('Error fetching classes:', error);
+      setAlertMessage({
+        message: error.message,
+        color: 'red',
+      });
     }
   };
 
@@ -68,9 +88,14 @@ const Enrollment = () => {
         credentials: 'include',
       });
       const data = await reponse.json();
+      
       setEnrollments(data);
     } catch (error) {
       console.error('Error fetching enrollments:', error);
+      setAlertMessage({
+        message: error.message,
+        color: 'red',
+      });
     }
   };
   return (
@@ -101,6 +126,13 @@ const Enrollment = () => {
                 </option>
               ))}
             </select>
+            
+        {
+          alertMessage.message && (
+            <p className={`text-${alertMessage.color}-500`}>
+                        {alertMessage.message}
+              </p>
+          )}
             <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
               Registrar
             </button>
