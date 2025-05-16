@@ -22,6 +22,8 @@ export const AuthProvider = ({ children }) => {
       const res = await login(userData);
       console.log('Usuario:', res);
       const permissions = rolePermissions[res.user.rol] || [];
+      console.log('Permisos:', permissions);
+
       setUser({ ...res, permissions });
       setIsAuthenticated(true);
     } catch (error) {

@@ -2,13 +2,8 @@ export const rolePermissions = {
   estudiante: [
     {
       id: 1,
-      name: 'view_classes',
-      description: 'Ver clases',
-    },
-    {
-      id: 2,
-      name: 'mark_attendance',
-      description: 'Marcar asistencia',
+      name: 'enrollment',
+      description: 'Inscripción',
     },
   ],
   profesor: [

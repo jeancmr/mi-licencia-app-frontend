@@ -5,28 +5,27 @@ const NavBar = () => {
   const { signOut, isAuthenticated } = useAuth();
 
   return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
+    <nav className="flex list-none justify-around">
+      <li className="">
+        <Link to={'/'}>mi-licencia</Link>
       </li>
-      {isAuthenticated ? (
+      <ul className="flex gap-4">
         <li>
-          <Link onClick={signOut} to="/login">
-            Login
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/login" onClick={isAuthenticated && signOut}>
+            {isAuthenticated ? 'Logout' : 'Login'}
           </Link>
         </li>
-      ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </li>
-      )}
-      <li>
-        <Link to="/dashboard">Dashboard</Link>
-      </li>
-      <li>
-        <Link to="/profile">Profile</Link>
-      </li>
-    </ul>
+        <li>
+          <Link to="/profile">Profile</Link>
+        </li>
+      </ul>
+    </nav>
   );
 };
 export default NavBar;
