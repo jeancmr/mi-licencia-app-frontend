@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { login, verifyToken, logout } from '../api/auth';
+import { login, verifyToken, logout,register } from '../api/auth';
 import { rolePermissions } from '../utils/permissions';
 
 export const AuthContext = createContext();
@@ -18,6 +18,16 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const signUp = async (userData) => {
+    try {
+      const res = await register(userData);
+      console.log('Usuario registrado:', res);
+      setErrors([]);
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+      setErrors(error.message.split('|'));
+    }
+  };
   const signIn = async (userData) => {
     try {
       const res = await login(userData);
@@ -70,7 +80,7 @@ export const AuthProvider = ({ children }) => {
   },[errors])
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, loading, user,errors }}>
+    <AuthContext.Provider value={{ signUp,signIn, signOut, isAuthenticated, loading, user,errors }}>
       {children}
     </AuthContext.Provider>
   );
