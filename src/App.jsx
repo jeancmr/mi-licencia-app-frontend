@@ -5,9 +5,10 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import NavBar from './components/NavBar';
 import Enrollment from './pages/Enrollment';
+import NavBar from './components/NavBar';
 import Register from './pages/Register';
+
 function App() {
   return (
     <AuthProvider>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />

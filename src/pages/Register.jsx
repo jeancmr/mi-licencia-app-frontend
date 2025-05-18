@@ -11,17 +11,26 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const { signUp, errors: registerErrors } = useAuth();
-  const [alert, setAlert] = useState('');
+  const [alert, setAlert] = useState({
+    message: '',
+    color: '',
+  });
 
   const onSubmit = handleSubmit(async (data) => {
-    signUp(data);
-    setAlert('Usuario registrado correctamente');
+    const res =  await signUp(data);
+    setAlert({
+      message: res ? 'Usuario registrado correctamente' : 'Error al registrar el usuario:',
+      color: res ? 'green' : 'red',
+    })
   });
 
   useEffect(()=>{
     if(alert){
         const timer = setTimeout(()=>{
-            setAlert('');
+            setAlert({
+              message: '',
+              color: '',
+            });
         }, 5000);
         return ()=> clearTimeout(timer);
     }
@@ -53,6 +62,12 @@ const Register = () => {
           type='text'
           placeholder='Identificación'
           register={register}
+          minLength={
+            {
+                value: 5,
+                message: 'La identificación debe tener al menos 5 caracteres'
+            }
+          }
           name='identificacion'
           required={true}
           error={errors.identificacion}
@@ -71,12 +86,21 @@ const Register = () => {
             }
             error={errors.contrasena}
           />
-            {registerErrors?.map((error, index) => (
-          <p key={index} className="text-red-500">
-            {error}
-          </p>
-        ))}
-        {alert && <p className="text-green-500">{alert}</p>}
+            
+
+        {
+          alert.message && (
+            <p className={`text-${alert.color}-500`}>{alert.message}</p>
+          )
+        }
+        
+        {
+          registerErrors?.map((error, index) => (
+            <p key={index} className="text-red-500">
+              {error}
+            </p>
+          ))
+        }
           <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
             Registrar usuario
           </button>

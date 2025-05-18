@@ -43,6 +43,7 @@ const Enrollment = () => {
         message: 'Inscripción exitosa',
         color: 'green',
       });
+      fetchEnrollments();
       
     } catch (error) {
       console.error('Error al inscribir:', error);

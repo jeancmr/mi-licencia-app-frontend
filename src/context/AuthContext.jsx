@@ -23,9 +23,11 @@ export const AuthProvider = ({ children }) => {
       const res = await register(userData);
       console.log('Usuario registrado:', res);
       setErrors([]);
+      return true;
     } catch (error) {
       console.error('Error al registrar el usuario:', error);
       setErrors(error.message.split('|'));
+      return false;
     }
   };
   const signIn = async (userData) => {
