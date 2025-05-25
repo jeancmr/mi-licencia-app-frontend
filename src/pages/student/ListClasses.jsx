@@ -45,7 +45,7 @@ const ListClasses = ({ clases, selectedClase, handleClaseClick, register }) => {
               </div>
               <div className="col-span-2">
                 <span className="text-gray-400">Cupos disponibles:</span>
-                <span className="ml-2">{clase.cuposMaximos}</span>
+                <span className="ml-2">{clase.cuposDisponibles}</span>
               </div>
             </div>
           </div>

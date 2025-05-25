@@ -30,22 +30,36 @@ const EnrollmentPage = () => {
     setValue('claseId', clase.id);
   };
 
-  const onSubmit = handleSubmit(async (data) => {
-    const enrollmentData = {
-      estudianteId: user.user.id,
-      claseId: data.claseId,
-    };
+  const onSubmit = handleSubmit(
+    async (data) => {
+      const enrollmentData = {
+        estudianteId: user.user.id,
+        claseId: data.claseId,
+      };
 
-    try {
-      await postData(`${API_URL}/inscripciones`, enrollmentData);
-      showAlert('Inscripción exitosa', 'Has sido inscrito/a en la clase correctamente', 'success');
-      setSelectedClase(null);
-      fetchEnrollments();
-    } catch (error) {
-      console.error('Error al inscribir la clase:', error);
-      showAlert('Error', error.message, 'error');
+      try {
+        await postData(`${API_URL}/inscripciones`, enrollmentData);
+        showAlert(
+          'Inscripción exitosa',
+          'Has sido inscrito/a en la clase correctamente',
+          'success'
+        );
+        setValue('claseId', null);
+        setSelectedClase(null);
+        fetchEnrollments();
+        fetchClasses();
+      } catch (error) {
+        console.error('Error al inscribir la clase:', error);
+        showAlert('Error', error.message, 'error');
+      }
+    },
+    (errors) => {
+      console.log('errores:', errors);
+      if (errors.claseId) {
+        showAlert('Error', 'Debe seleccionar una clase', 'error');
+      }
     }
-  });
+  );
 
   useEffect(() => {
     fetchClasses();
@@ -89,7 +103,9 @@ const EnrollmentPage = () => {
             'La inscripción ha sido eliminada correctamente',
             'success'
           );
+          setSelectedClase(null);
           fetchEnrollments();
+          fetchClasses();
         }
       });
     } catch (error) {
