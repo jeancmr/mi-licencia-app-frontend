@@ -1,14 +1,15 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Main from './shared/Main';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-500 to-purple-500">
-        Loading...
-      </div>
+      <Main>
+        <p>Loading...</p>
+      </Main>
     );
   }
 
@@ -16,6 +17,10 @@ const ProtectedRoute = () => {
     return <Navigate to="/login" />;
   }
 
-  return <Outlet />;
+  return (
+    <Main>
+      <Outlet />
+    </Main>
+  );
 };
 export default ProtectedRoute;
