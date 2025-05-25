@@ -7,15 +7,12 @@ import ListClasses from './ListClasses';
 import Button from '../../components/shared/Button';
 import { postData, getEnrollments } from '../../api/enrollment';
 import { getClasses } from '../../api/classes';
+import { showAlert } from '../../utils/alertMessage';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const EnrollmentPage = () => {
   const { user } = useAuth();
   const [showClasses, setShowClasses] = useState(false);
-  const [alertMessage, setAlertMessage] = useState({
-    message: '',
-    color: '',
-  });
   const [selectedClase, setSelectedClase] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clases, setClases] = useState([]);
@@ -41,18 +38,12 @@ const EnrollmentPage = () => {
 
     try {
       const data = await postData(`${API_URL}/inscripciones`, enrollmentData);
-      setAlertMessage({
-        message: 'Inscripción exitosa',
-        color: 'green',
-      });
+      showAlert('Inscripción exitosa', 'Has sido inscrito/a en la clase correctamente', 'success');
       setSelectedClase(null);
       fetchEnrollments();
     } catch (error) {
       console.error('Error al inscribir:', error);
-      setAlertMessage({
-        message: error.message,
-        color: 'red',
-      });
+      showAlert('Error', error.message, 'error');
     }
   });
 
@@ -65,17 +56,10 @@ const EnrollmentPage = () => {
     try {
       setIsLoading(true);
       const response = await getClasses(`${API_URL}/clases`);
-      const dataFormatted = response.map((clase) => ({
-        ...clase,
-        fecha: new Date(clase.fecha).toLocaleDateString(),
-      }));
-      setClases(dataFormatted);
+      setClases(response);
     } catch (error) {
       console.error('Error fetching classes:', error);
-      setAlertMessage({
-        message: error.message,
-        color: 'red',
-      });
+      showAlert('Error', 'Error al obtener las clases', 'error');
     } finally {
       setIsLoading(false);
     }
@@ -87,10 +71,7 @@ const EnrollmentPage = () => {
       setEnrollments(data);
     } catch (error) {
       console.error('Error fetching enrollments:', error);
-      setAlertMessage({
-        message: error.message,
-        color: 'red',
-      });
+      showAlert('Error', 'Error al obtener las inscripciones', 'error');
     }
   };
 
@@ -117,15 +98,6 @@ const EnrollmentPage = () => {
                 handleClaseClick={handleClaseClick}
                 register={register}
               />
-            )}
-
-            {errors.claseId && (
-              <p className="text-red-500 text-sm mb-2">{errors.claseId.message}</p>
-            )}
-            {alertMessage.message && (
-              <p className={`text-${alertMessage.color}-500 text-sm mb-2`}>
-                {alertMessage.message}
-              </p>
             )}
 
             <div className="sticky bottom-0 ">
