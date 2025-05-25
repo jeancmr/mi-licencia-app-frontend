@@ -24,7 +24,7 @@ const Login = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-500 to-purple-500">
+    <div className="flex justify-center items-center h-screen from-blue-500 to-purple-500">
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
     
         <h1 className="text-2xl font-bold">Inicio de sesión</h1>

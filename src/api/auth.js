@@ -1,6 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-
 export const register = async (userData) => {
   try {
     const response = await fetch(`${API_URL}/register`, {
@@ -57,7 +56,6 @@ export const logout = async () => {
     });
 
     const data = await response.json();
-    console.log('Logout response:', data);
 
     if (!response.ok) {
       throw new Error(data.message || 'Ocurrió un error al cerrar sesión');

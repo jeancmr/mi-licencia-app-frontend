@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { login, verifyToken, logout,register } from '../api/auth';
+import { login, verifyToken, logout, register } from '../api/auth';
 import { rolePermissions } from '../utils/permissions';
 
 export const AuthContext = createContext();
@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (userData) => {
     try {
       const res = await register(userData);
-      console.log('Usuario registrado:', res);
       setErrors([]);
       return true;
     } catch (error) {
@@ -63,7 +62,6 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = async () => {
     const res = await logout();
-    console.log('Logout response:', res);
     setUser(null);
     setIsAuthenticated(false);
   };
@@ -72,17 +70,19 @@ export const AuthProvider = ({ children }) => {
     verify();
   }, []);
 
-  useEffect(()=>{
-   if(errors.length > 0){
-    const timer = setTimeout(()=>{
-      setErrors([]);
-    }, 5000);
-    return ()=> clearTimeout(timer);
-   }
-  },[errors])
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
-    <AuthContext.Provider value={{ signUp,signIn, signOut, isAuthenticated, loading, user,errors }}>
+    <AuthContext.Provider
+      value={{ signUp, signIn, signOut, isAuthenticated, loading, user, errors }}
+    >
       {children}
     </AuthContext.Provider>
   );

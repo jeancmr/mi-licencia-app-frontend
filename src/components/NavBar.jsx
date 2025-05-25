@@ -20,7 +20,7 @@ const NavBar = () => {
                 <Link to="/profile">Perfil</Link>
               </li>
               <li>
-                <button onClick={signOut}>Cerrar sesión</button>
+                <button onClick={signOut} className='cursor-pointer'>Cerrar sesión</button>
               </li>
             </>
           ) : (

@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import Enrollment from './pages/Enrollment';
+import EnrollmentPage from './pages/student/EnrollmentPage';
 import NavBar from './components/NavBar';
 import Register from './pages/Register';
 
@@ -22,7 +22,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/enrollment" element={<Enrollment />} />
+            <Route path="/enrollment" element={<EnrollmentPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
