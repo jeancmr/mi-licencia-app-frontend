@@ -30,3 +30,20 @@ export const getEnrollments = async (url) => {
     console.error('Error fetching enrollments:', error);
   }
 };
+
+export const deleteEnrollment = async (url) => {
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || 'Something went wrong');
+  }
+  return data;
+};

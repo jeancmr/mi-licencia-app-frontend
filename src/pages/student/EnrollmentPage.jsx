@@ -5,9 +5,9 @@ import ListEnrollment from './ListEnrollment';
 import Loading from '../../components/shared/Loading';
 import ListClasses from './ListClasses';
 import Button from '../../components/shared/Button';
-import { postData, getEnrollments } from '../../api/enrollment';
+import { postData, getEnrollments, deleteEnrollment } from '../../api/enrollment';
 import { getClasses } from '../../api/classes';
-import { showAlert } from '../../utils/alertMessage';
+import { showAlert, showConfirmation } from '../../utils/alertMessage';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const EnrollmentPage = () => {
@@ -37,12 +37,12 @@ const EnrollmentPage = () => {
     };
 
     try {
-      const data = await postData(`${API_URL}/inscripciones`, enrollmentData);
+      await postData(`${API_URL}/inscripciones`, enrollmentData);
       showAlert('Inscripción exitosa', 'Has sido inscrito/a en la clase correctamente', 'success');
       setSelectedClase(null);
       fetchEnrollments();
     } catch (error) {
-      console.error('Error al inscribir:', error);
+      console.error('Error al inscribir la clase:', error);
       showAlert('Error', error.message, 'error');
     }
   });
@@ -75,6 +75,29 @@ const EnrollmentPage = () => {
     }
   };
 
+  const handleDeleteEnrollment = async (enrollmentId) => {
+    try {
+      showConfirmation(
+        '¿Seguro que deseas eliminar la inscripción?',
+        'Esta acción no se puede deshacer',
+        'warning'
+      ).then(async (result) => {
+        if (result.isConfirmed) {
+          await deleteEnrollment(`${API_URL}/inscripciones/${enrollmentId}`);
+          showAlert(
+            'Inscripción eliminada',
+            'La inscripción ha sido eliminada correctamente',
+            'success'
+          );
+          fetchEnrollments();
+        }
+      });
+    } catch (error) {
+      console.error('Error al eliminar la inscripción:', error);
+      showAlert('Error', error.message, 'error');
+    }
+  };
+
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">
@@ -83,7 +106,7 @@ const EnrollmentPage = () => {
 
       {showClasses ? (
         <>
-          <ListEnrollment enrollments={enrollments} />
+          <ListEnrollment enrollments={enrollments} onDeleteEnrollment={handleDeleteEnrollment} />
         </>
       ) : (
         <>
