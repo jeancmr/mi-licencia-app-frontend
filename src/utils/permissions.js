@@ -9,13 +9,13 @@ export const rolePermissions = {
   profesor: [
     {
       id: 1,
-      name: 'manage_classes',
-      description: 'Gestionar clases',
+      name: 'assigned_Classes',
+      description: 'Clases asignadas',
     },
     {
       id: 2,
       name: 'view_attendance',
-      description: 'Ver asistencia',
+      description: 'Asistencia',
     },
   ],
   admin: [
@@ -37,7 +37,7 @@ export const rolePermissions = {
     {
       id: 4,
       name: 'view_attendance',
-      description: 'Ver asistencia',
+      description: 'Asistencia',
     },
   ],
 };
