@@ -9,6 +9,7 @@ import EnrollmentPage from './pages/student/EnrollmentPage';
 import NavBar from './components/NavBar';
 import Register from './pages/Register';
 import ListClasses from './pages/professor/ListClasses';
+import ListAttendance from './pages/professor/ListAttendance';
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/enrollment" element={<EnrollmentPage />} />
-            <Route path="assigned_Classes" element={<ListClasses />} />
+            <Route path="/assigned_Classes" element={<ListClasses />} />
+            <Route path="/attendance" element={<ListAttendance />} />
           </Route>
         </Routes>
       </BrowserRouter>

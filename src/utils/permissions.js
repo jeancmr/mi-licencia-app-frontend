@@ -10,12 +10,12 @@ export const rolePermissions = {
     {
       id: 1,
       name: 'assigned_Classes',
-      description: 'Clases asignadas',
+      description: 'Mis Clases',
     },
     {
       id: 2,
-      name: 'view_attendance',
-      description: 'Asistencia',
+      name: 'attendance',
+      description: 'Tomar asistencia',
     },
   ],
   admin: [
