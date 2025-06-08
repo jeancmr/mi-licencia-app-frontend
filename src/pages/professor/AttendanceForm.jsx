@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 const API_URL = import.meta.env.VITE_API_URL;
 
-const ModalAsistencia = ({ classId, setOpenModal, students }) => {
+const AttendanceForm = ({ classId, onOpenAttendanceForm, students }) => {
   const {
     register,
     handleSubmit,
@@ -26,7 +26,7 @@ const ModalAsistencia = ({ classId, setOpenModal, students }) => {
       }),
     });
 
-    setOpenModal(false);
+    onOpenAttendanceForm(false);
   };
 
   return (
@@ -41,25 +41,12 @@ const ModalAsistencia = ({ classId, setOpenModal, students }) => {
           </tr>
         </thead>
         <tbody>
-          {/* {students.map((estudiante) => (
-            <tr key={estudiante.id}>
-              <td className="border px-4 py-2">
-                <input
-                  type="checkbox"
-                  {...register(`asistencia.${estudiante.id}`)}
-                  className="w-5 h-5"
-                />
-              </td>
-              <td className="border px-4 py-2">{estudiante.nombre}</td>
-            </tr>
-          ))} */}
-
           {students.map((estudiante) => (
             <tr key={estudiante.id}>
               <td className="border px-4 py-2">
                 <input
                   type="checkbox"
-                  {...register(`asistencia.id_${estudiante.id}`)} // 👈 prefijo evita índices
+                  {...register(`asistencia.id_${estudiante.id}`)}
                   className="w-5 h-5"
                 />
               </td>
@@ -79,4 +66,4 @@ const ModalAsistencia = ({ classId, setOpenModal, students }) => {
   );
 };
 
-export default ModalAsistencia;
+export default AttendanceForm;

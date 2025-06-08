@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { useClasses } from '../../hooks/useClasses';
 import { useAuth } from '../../context/AuthContext';
-import ModalAsistencia from './ModalAsistencia';
+import AttendanceForm from './AttendanceForm';
 import ClassCard from '../../components/ClassCard';
 
 const ListAttendance = () => {
   const { user } = useAuth();
   const { classes, isLoading } = useClasses('professor', user.user.id, true);
   const [classSelected, setClassSelected] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
+  const [openAttendanceForm, setOpenAttendanceForm] = useState(false);
   const [students, setStudents] = useState([]);
 
   const handleClassSelected = (clase) => {
     console.log('Clase seleccionada:', clase);
     setClassSelected(clase);
     setStudents(clase.estudiantes);
-    setOpenModal(true);
+    setOpenAttendanceForm(true);
   };
 
   if (isLoading) {
@@ -24,11 +24,11 @@ const ListAttendance = () => {
 
   return (
     <>
-      {openModal && classSelected ? (
-        <ModalAsistencia 
-          classId={classSelected} 
-          setOpenModal={setOpenModal} 
-          students={students} 
+      {openAttendanceForm && classSelected ? (
+        <AttendanceForm
+          classId={classSelected}
+          onOpenAttendanceForm={setOpenAttendanceForm}
+          students={students}
         />
       ) : (
         <div className="grid grid-cols-2 gap-4">
@@ -39,11 +39,7 @@ const ListAttendance = () => {
           )}
 
           {classes.map((clase) => (
-            <ClassCard
-              key={clase.id}
-              clase={clase}
-              onClick={handleClassSelected}
-            />
+            <ClassCard key={clase.id} clase={clase} onClick={handleClassSelected} />
           ))}
         </div>
       )}
