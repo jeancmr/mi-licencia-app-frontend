@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import PermissionsList from '../components/PermissionsList';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -8,15 +9,9 @@ const Dashboard = () => {
   return (
     <section>
       <h2 className="text-2xl font-bold">Bienvenido, {user.user.nombre}</h2>
+      <p>¿Qué desea hacer?</p>
 
-      <p>¿Qué le gustaría hacer?</p>
-      <ul className="list-disc list-inside flex gap-4 mt-2.5">
-        {permissions.map((item) => (
-          <Link to={`/${item.name}`} className="text-blue-500 hover:underline" key={item.id}>
-            {item.description}
-          </Link>
-        ))}
-      </ul>
+      <PermissionsList permissions={permissions} />
     </section>
   );
 };

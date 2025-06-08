@@ -3,17 +3,13 @@ import { useAuth } from '../context/AuthContext';
 import Main from './shared/Main';
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
-  if (loading) {
-    return (
-      <Main>
-        <p>Loading...</p>
-      </Main>
-    );
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
 
-  if (!isAuthenticated && !loading) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 

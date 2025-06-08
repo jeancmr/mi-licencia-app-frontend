@@ -3,7 +3,7 @@ export const rolePermissions = {
     {
       id: 1,
       name: 'enrollment',
-      description: 'Ver inscripciones',
+      description: 'Inscripciones',
     },
   ],
   profesor: [

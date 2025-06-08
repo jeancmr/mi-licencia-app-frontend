@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const signUp = async (userData) => {
     try {
@@ -46,6 +46,8 @@ export const AuthProvider = ({ children }) => {
 
   const verify = async () => {
     try {
+      setIsLoading(true);
+      console.log('Verificando token...');
       const res = await verifyToken();
       console.log('Usuario verificado:', res);
       const permissions = rolePermissions[res.user.rol] || [];
@@ -56,7 +58,7 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       setIsAuthenticated(false);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -81,7 +83,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUp, signIn, signOut, isAuthenticated, loading, user, errors }}
+      value={{ signUp, signIn, signOut, isAuthenticated, isLoading, user, errors }}
     >
       {children}
     </AuthContext.Provider>
