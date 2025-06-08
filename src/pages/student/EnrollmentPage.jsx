@@ -1,155 +1,67 @@
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import ListEnrollment from './ListEnrollment';
-import Loading from '../../components/shared/Loading';
-import ListClasses from './ListClasses';
 import Button from '../../components/shared/Button';
-import { postData, getEnrollments, deleteEnrollment } from '../../api/enrollment';
-import { getClasses } from '../../api/classes';
-import { showAlert, showConfirmation } from '../../utils/alertMessage';
-const API_URL = import.meta.env.VITE_API_URL;
+import EnrollmentForm from '../../components/enrollment/EnrollmentForm';
+import { useEnrollments } from '../../hooks/useEnrollments';
+import { useClasses } from '../../hooks/useClasses';
+import { useClassSelection } from '../../hooks/useClassSelection';
+import { ENROLLMENT_MESSAGES } from '../../constants/messages';
 
 const EnrollmentPage = () => {
   const { user } = useAuth();
-  const [showClasses, setShowClasses] = useState(false);
-  const [selectedClase, setSelectedClase] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [clases, setClases] = useState([]);
-  const [enrollments, setEnrollments] = useState([]);
+  const [showEnrolledClasses, setShowEnrolledClasses] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const { enrollments, createEnrollment, removeEnrollment } = useEnrollments(user?.user?.id);
+  const { classes, isLoading: isLoadingClasses, fetchClasses } = useClasses();
+  const { selectedClassId, selectClass, register, createSubmitHandler } = useClassSelection();
 
-  const handleClaseClick = (clase) => {
-    setSelectedClase(clase.id);
-    setValue('claseId', clase.id);
-  };
+  const handleEnrollmentSubmit = async (formData) => {
+    const enrollmentData = {
+      estudianteId: user.user.id,
+      claseId: formData.claseId,
+    };
 
-  const onSubmit = handleSubmit(
-    async (data) => {
-      const enrollmentData = {
-        estudianteId: user.user.id,
-        claseId: data.claseId,
-      };
-
-      try {
-        await postData(`${API_URL}/inscripciones`, enrollmentData);
-        showAlert(
-          'Inscripción exitosa',
-          'Has sido inscrito/a en la clase correctamente',
-          'success'
-        );
-        setValue('claseId', null);
-        setSelectedClase(null);
-        fetchEnrollments();
-        fetchClasses();
-      } catch (error) {
-        console.error('Error al inscribir la clase:', error);
-        showAlert('Error', error.message, 'error');
-      }
-    },
-    (errors) => {
-      console.log('errores:', errors);
-      if (errors.claseId) {
-        showAlert('Error', 'Debe seleccionar una clase', 'error');
-      }
-    }
-  );
-
-  useEffect(() => {
-    fetchClasses();
-    fetchEnrollments();
-  }, []);
-
-  const fetchClasses = async () => {
-    try {
-      setIsLoading(true);
-      const response = await getClasses(`${API_URL}/clases`);
-      setClases(response);
-    } catch (error) {
-      console.error('Error fetching classes:', error);
-      showAlert('Error', 'Error al obtener las clases', 'error');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchEnrollments = async () => {
-    try {
-      const data = await getEnrollments(`${API_URL}/inscripciones/estudiante/${user.user.id}`);
-      setEnrollments(data);
-    } catch (error) {
-      console.error('Error fetching enrollments:', error);
-      showAlert('Error', 'Error al obtener las inscripciones', 'error');
+    const success = await createEnrollment(enrollmentData);
+    if (success) {
+      fetchClasses();
     }
   };
 
   const handleDeleteEnrollment = async (enrollmentId) => {
-    try {
-      showConfirmation(
-        '¿Seguro que deseas eliminar la inscripción?',
-        'Esta acción no se puede deshacer',
-        'warning'
-      ).then(async (result) => {
-        if (result.isConfirmed) {
-          await deleteEnrollment(`${API_URL}/inscripciones/${enrollmentId}`);
-          showAlert(
-            'Inscripción eliminada',
-            'La inscripción ha sido eliminada correctamente',
-            'success'
-          );
-          setSelectedClase(null);
-          fetchEnrollments();
-          fetchClasses();
-        }
-      });
-    } catch (error) {
-      console.error('Error al eliminar la inscripción:', error);
-      showAlert('Error', error.message, 'error');
+    const success = await removeEnrollment(enrollmentId);
+    if (success) {
+      fetchClasses();
     }
   };
+
+  const onSubmit = createSubmitHandler(handleEnrollmentSubmit);
 
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">
-        {showClasses ? 'Clases Inscritas' : 'Registrar clase'}
+        {showEnrolledClasses
+          ? ENROLLMENT_MESSAGES.TITLES.ENROLLED_CLASSES
+          : ENROLLMENT_MESSAGES.TITLES.REGISTER_CLASS}
       </h1>
 
-      {showClasses ? (
-        <>
-          <ListEnrollment enrollments={enrollments} onDeleteEnrollment={handleDeleteEnrollment} />
-        </>
+      {showEnrolledClasses ? (
+        <ListEnrollment enrollments={enrollments} onDeleteEnrollment={handleDeleteEnrollment} />
       ) : (
-        <>
-          <form onSubmit={onSubmit} className="space-y-4 pr-2 flex-1 overflow-y-auto relative">
-            <label className="block text-gray-300 text-lg mb-4">Seleccione una clase</label>
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <ListClasses
-                clases={clases}
-                selectedClase={selectedClase}
-                handleClaseClick={handleClaseClick}
-                register={register}
-              />
-            )}
-
-            <div className="sticky bottom-0 ">
-              <Button type="submit" className="w-full mt-0">
-                Registrar
-              </Button>
-            </div>
-          </form>
-        </>
+        <EnrollmentForm
+          classes={classes}
+          isLoadingClasses={isLoadingClasses}
+          selectedClassId={selectedClassId}
+          onClassSelect={selectClass}
+          onSubmit={onSubmit}
+          register={register}
+        />
       )}
 
-      <Button className="mt-6" onClick={() => setShowClasses(!showClasses)}>
-        {showClasses ? 'Ocultar clases' : 'Ver clases registradas'}
+      <Button className="mt-6" onClick={() => setShowEnrolledClasses(!showEnrolledClasses)}>
+        {showEnrolledClasses
+          ? ENROLLMENT_MESSAGES.BUTTONS.HIDE_CLASSES
+          : ENROLLMENT_MESSAGES.BUTTONS.SHOW_CLASSES}
       </Button>
     </>
   );

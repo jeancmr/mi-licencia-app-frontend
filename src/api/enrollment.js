@@ -1,4 +1,4 @@
-export const postData = async (url, body) => {
+export const generateEnrollment = async (url, body) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
