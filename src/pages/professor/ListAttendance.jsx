@@ -12,7 +12,6 @@ const ListAttendance = () => {
   const [students, setStudents] = useState([]);
 
   const handleClassSelected = (clase) => {
-    console.log('Clase seleccionada:', clase);
     setClassSelected(clase);
     setStudents(clase.estudiantes);
     setOpenAttendanceForm(true);

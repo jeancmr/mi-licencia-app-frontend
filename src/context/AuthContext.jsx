@@ -47,14 +47,12 @@ export const AuthProvider = ({ children }) => {
   const verify = async () => {
     try {
       setIsLoading(true);
-      console.log('Verificando token...');
       const res = await verifyToken();
       console.log('Usuario verificado:', res);
       const permissions = rolePermissions[res.user.rol] || [];
       setUser({ ...res, permissions });
       setIsAuthenticated(true);
     } catch (error) {
-      console.error('Error al verificar el token:', error);
       setUser(null);
       setIsAuthenticated(false);
     } finally {

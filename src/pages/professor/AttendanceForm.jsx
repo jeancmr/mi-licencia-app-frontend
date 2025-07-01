@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { generateAttendance } from '../../api/attendance';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const AttendanceForm = ({ classId, onOpenAttendanceForm, students }) => {
@@ -16,15 +17,12 @@ const AttendanceForm = ({ classId, onOpenAttendanceForm, students }) => {
       asistio: !!asistio,
     }));
 
-    await fetch(`${API_URL}/asistencias/registro-multiple`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({
-        claseId: classId.id,
-        asistencias,
-      }),
-    });
+    const enrollmentData = {
+      claseId: classId.id,
+      asistencias,
+    };
+
+    await generateAttendance(`${API_URL}/asistencias/registro-multiple`, enrollmentData);
 
     onOpenAttendanceForm(false);
   };
