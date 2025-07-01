@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { generateAttendance } from '../../api/attendance';
+import { showAlert } from '../../utils/alertMessage';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const AttendanceForm = ({ classId, onOpenAttendanceForm, students }) => {
@@ -22,7 +23,16 @@ const AttendanceForm = ({ classId, onOpenAttendanceForm, students }) => {
       asistencias,
     };
 
-    await generateAttendance(`${API_URL}/asistencias/registro-multiple`, enrollmentData);
+    try {
+      await generateAttendance(`${API_URL}/asistencias/registro-multiple`, enrollmentData);
+      showAlert(
+        'Asistencia registrada',
+        'La asistencia ha sido registrada exitosamente.',
+        'success'
+      );
+    } catch (error) {
+      showAlert('Error', error.message, 'error');
+    }
 
     onOpenAttendanceForm(false);
   };

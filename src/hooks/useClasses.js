@@ -13,12 +13,12 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
     try {
       setIsLoading(true);
       let url = `${API_URL}/clases`;
-      
+
       // If it's a professor, fetch their assigned classes
       if (userType === 'professor' && userId) {
         url = `${API_URL}/clases/professor/${userId}`;
       }
-      
+
       const response = await getClasses(url);
       let filteredClasses = response;
 
@@ -28,8 +28,8 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
         const day = today.getDate();
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
-        const todayDate = `${day}/${month}/${year}`;
-        
+        const todayDate = `${month}/${day}/${year}`;
+
         filteredClasses = response.filter((clase) => clase.fecha === todayDate);
       }
 
@@ -49,6 +49,6 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
   return {
     classes,
     isLoading,
-    fetchClasses
+    fetchClasses,
   };
-}; 
+};
