@@ -34,6 +34,6 @@ export const post = async (url, requestData) => {
 
     return data;
   } catch (error) {
-    throw new Error(error.message || 'Ocurrió un error al iniciar sesión');
+    throw new Error(error.message);
   }
 };
