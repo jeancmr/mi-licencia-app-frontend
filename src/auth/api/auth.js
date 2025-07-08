@@ -32,6 +32,7 @@ export const logout = async () => {
 export const verifyToken = async () => {
   try {
     const response = await get(`${API_URL}/verify`);
+    console.log('Verifying token:', response);
     return response;
   } catch (error) {
     throw new Error(error.message || 'Ocurrió un error al verificar el token');

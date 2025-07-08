@@ -1,10 +1,10 @@
-const ClassCard = ({ 
-  clase, 
-  onClick, 
-  isSelected = false, 
-  showRadio = false, 
+const ClassCard = ({
+  clase,
+  onClick,
+  isSelected = false,
+  showRadio = false,
   register = null,
-  showProfessor = false 
+  showProfessor = false,
 }) => {
   return (
     <div
@@ -26,12 +26,10 @@ const ClassCard = ({
           className="hidden"
         />
       )}
-      
+
       <div className="flex flex-col space-y-2">
-        <h3 className="text-lg font-semibold text-indigo-400">
-          {clase?.materia?.nombre}
-        </h3>
-        
+        <h3 className="text-lg font-semibold text-indigo-400">{clase?.materia?.nombre}</h3>
+
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
             <span className="text-gray-400">Fecha:</span>
@@ -49,14 +47,14 @@ const ClassCard = ({
             <span className="text-gray-400">Hora fin:</span>
             <span className="ml-2">{clase.horaFin}</span>
           </div>
-          
+
           {showProfessor && clase.profesor && (
             <div className="col-span-2">
               <span className="text-gray-400">Profesor:</span>
               <span className="ml-2">{clase.profesor.nombre}</span>
             </div>
           )}
-          
+
           <div className="col-span-2">
             <span className="text-gray-400">Cupos disponibles:</span>
             <span className="ml-2">{clase.cuposDisponibles}</span>
@@ -67,4 +65,4 @@ const ClassCard = ({
   );
 };
 
-export default ClassCard; 
+export default ClassCard;

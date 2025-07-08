@@ -1,7 +1,7 @@
-import { useAuth } from '../context/AuthContext';
-import UserOptions from '../components/UserOptions';
+import { useAuth } from '../../context/AuthContext';
+import { UserOptions } from '../components/';
 
-const Dashboard = () => {
+const DashboardPage = () => {
   const { user } = useAuth();
   const { permissions } = user;
 
@@ -14,4 +14,4 @@ const Dashboard = () => {
     </section>
   );
 };
-export default Dashboard;
+export default DashboardPage;

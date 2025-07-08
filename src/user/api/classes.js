@@ -1,4 +1,4 @@
-import { get } from './base';
+import { get } from '../../auth/api/base';
 
 export const getClasses = async (url) => {
   try {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { login, verifyToken, logout, register } from '../api/auth';
+import { login, verifyToken, logout, register } from '../auth/api/auth';
 import { rolePermissions } from '../utils/permissions';
 
 export const AuthContext = createContext();

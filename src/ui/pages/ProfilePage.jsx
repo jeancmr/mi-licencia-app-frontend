@@ -1,6 +1,6 @@
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
-const Profile = () => {
+const ProfilePage = () => {
   const {
     user: { user },
   } = useAuth();
@@ -16,4 +16,4 @@ const Profile = () => {
     </section>
   );
 };
-export default Profile;
+export default ProfilePage;

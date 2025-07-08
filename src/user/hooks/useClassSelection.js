@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { showAlert } from '../utils/alertMessage';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
+import { showAlert } from '../../utils/alertMessage';
 
 export const useClassSelection = () => {
   const [selectedClassId, setSelectedClassId] = useState(null);
-  
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const selectClass = (classData) => {
@@ -46,6 +46,6 @@ export const useClassSelection = () => {
     clearSelection,
     register,
     createSubmitHandler,
-    formErrors: errors
+    formErrors: errors,
   };
-}; 
+};

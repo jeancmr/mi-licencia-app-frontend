@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
-import InputForm from '../components/shared/InputForm';
+import InputForm from '../../components/shared/InputForm';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
-const Login = () => {
+const LoginPage = () => {
   const {
     register,
     handleSubmit,
@@ -63,4 +63,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default LoginPage;

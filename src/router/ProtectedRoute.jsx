@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Main from './shared/Main';
+import { Main, NavBar } from '../ui/components/';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -14,9 +14,12 @@ const ProtectedRoute = () => {
   }
 
   return (
-    <Main>
-      <Outlet />
-    </Main>
+    <>
+      <NavBar />
+      <Main>
+        <Outlet />
+      </Main>
+    </>
   );
 };
 export default ProtectedRoute;

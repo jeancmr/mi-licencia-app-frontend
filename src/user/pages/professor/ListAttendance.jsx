@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useClasses } from '../../hooks/useClasses';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import AttendanceForm from './AttendanceForm';
 import ClassCard from '../../components/ClassCard';
 
 const ListAttendance = () => {
   const { user } = useAuth();
+
   const { classes, isLoading } = useClasses('professor', user.user.id, true);
   const [classSelected, setClassSelected] = useState(null);
   const [openAttendanceForm, setOpenAttendanceForm] = useState(false);

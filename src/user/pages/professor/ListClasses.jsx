@@ -1,6 +1,6 @@
 import { useClasses } from '../../hooks/useClasses';
-import { useAuth } from '../../context/AuthContext';
 import ClassCard from '../../components/ClassCard';
+import { useAuth } from '../../../context/AuthContext';
 
 const ListClasses = () => {
   const { user } = useAuth();
