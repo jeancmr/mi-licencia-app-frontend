@@ -1,12 +1,8 @@
 import { useState } from 'react';
-import ListEnrollment from './ListEnrollment';
-import Button from '../../components/Button';
-import { useEnrollments } from '../../hooks/useEnrollments';
-import { useClasses } from '../../hooks/useClasses';
-import { useClassSelection } from '../../hooks/useClassSelection';
-import { ENROLLMENT_MESSAGES } from '../../constants/messages';
 import { useAuth } from '../../../context/AuthContext';
-import EnrollmentForm from '../../components/EnrollmentForm';
+import { useClassSelection, useClasses, useEnrollments } from '../../hooks/';
+import { ENROLLMENT_MESSAGES } from '../../constants/messages';
+import { EnrollmentForm, EnrollmentList, Button } from '../../components/';
 
 const EnrollmentPage = () => {
   const { user } = useAuth();
@@ -46,7 +42,7 @@ const EnrollmentPage = () => {
       </h1>
 
       {showEnrolledClasses ? (
-        <ListEnrollment enrollments={enrollments} onDeleteEnrollment={handleDeleteEnrollment} />
+        <EnrollmentList enrollments={enrollments} onDeleteEnrollment={handleDeleteEnrollment} />
       ) : (
         <EnrollmentForm
           classes={classes}

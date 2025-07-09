@@ -1,6 +1,6 @@
 import ClassCard from './ClassCard';
 
-const ListClasses = ({
+const ClassList = ({
   classes = [],
   selectedClase = null,
   showProfessor = false,
@@ -32,4 +32,4 @@ const ListClasses = ({
   );
 };
 
-export default ListClasses;
+export default ClassList;

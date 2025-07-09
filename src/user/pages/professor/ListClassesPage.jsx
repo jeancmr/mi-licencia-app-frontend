@@ -1,6 +1,6 @@
-import { useClasses } from '../../hooks/useClasses';
+import { useClasses } from '../../hooks/';
 import { useAuth } from '../../../context/AuthContext';
-import ListClasses from '../../components/ListClasses';
+import { ClassList } from '../../components';
 
 const ListClassesPage = () => {
   const { user } = useAuth();
@@ -10,7 +10,7 @@ const ListClassesPage = () => {
     return <div className="flex justify-center items-center">Cargando clases...</div>;
   }
 
-  return <ListClasses classes={classes} showProfessor={true} />;
+  return <ClassList classes={classes} showProfessor={true} />;
 };
 
 export default ListClassesPage;

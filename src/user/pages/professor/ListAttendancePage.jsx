@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { useClasses } from '../../hooks/useClasses';
 import { useAuth } from '../../../context/AuthContext';
-import AttendanceForm from './AttendanceForm';
-import ListClasses from '../../components/ListClasses';
+import { useClasses } from '../../hooks';
+import { AttendanceForm, ClassList } from '../../components';
 
 const ListAttendancePage = () => {
   const { user } = useAuth();
@@ -31,7 +30,7 @@ const ListAttendancePage = () => {
           students={students}
         />
       ) : (
-        <ListClasses classes={classes} handleClaseClick={handleClassSelected} />
+        <ClassList classes={classes} handleClaseClick={handleClassSelected} />
       )}
     </>
   );

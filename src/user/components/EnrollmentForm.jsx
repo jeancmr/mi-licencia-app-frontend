@@ -1,7 +1,5 @@
-import Loading from './Loading';
-import Button from './Button';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
-import ListClasses from './ListClasses';
+import { ClassList, Button, Loading } from './';
 
 const EnrollmentForm = ({
   classes,
@@ -20,7 +18,7 @@ const EnrollmentForm = ({
       {isLoadingClasses ? (
         <Loading />
       ) : (
-        <ListClasses
+        <ClassList
           classes={classes}
           selectedClase={selectedClassId}
           handleClaseClick={onClassSelect}
