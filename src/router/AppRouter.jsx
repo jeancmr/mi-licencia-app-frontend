@@ -6,6 +6,7 @@ import ListClasses from '../user/pages/professor/ListClasses';
 import ListAttendance from '../user/pages/professor/ListAttendance';
 import PublicRoute from './PublicRoute';
 import { LoginPage, RegisterPage } from '../auth/pages';
+import PageNotFound from '../ui/pages/PageNotFound';
 
 const AppRouter = () => {
   return (
@@ -23,6 +24,8 @@ const AppRouter = () => {
         <Route path="/assigned_Classes" element={<ListClasses />} />
         <Route path="/attendance" element={<ListAttendance />} />
       </Route>
+
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
