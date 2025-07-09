@@ -1,5 +1,5 @@
 import { useClasses } from '../../hooks/';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../auth/hooks/useAuth';
 import { ClassList } from '../../components';
 
 const ListClassesPage = () => {

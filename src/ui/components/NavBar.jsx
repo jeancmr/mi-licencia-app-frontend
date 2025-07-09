@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../auth/hooks/useAuth';
 
 const NavBar = () => {
   const { signOut, isAuthenticated } = useAuth();

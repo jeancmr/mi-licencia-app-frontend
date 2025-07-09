@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../auth/hooks/useAuth';
 import { useClassSelection, useClasses, useEnrollments } from '../../hooks/';
 import { ENROLLMENT_MESSAGES } from '../../constants/messages';
 import { EnrollmentForm, EnrollmentList, Button } from '../../components/';

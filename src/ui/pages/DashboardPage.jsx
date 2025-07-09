@@ -1,4 +1,4 @@
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { UserOptions } from '../components/';
 
 const DashboardPage = () => {
