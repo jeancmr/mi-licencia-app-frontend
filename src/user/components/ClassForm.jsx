@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getUsersByRol } from '../api/getUsersByRol';
+import BackButton from './BackButton';
 
-const ClassForm = ({ selectedClass, onRemoveClass }) => {
+const ClassForm = ({ selectedClass, onRemoveClass, onGoBack }) => {
   const [dateInput, setDateInput] = useState(selectedClass.originalDate);
   const [professors, setProfessors] = useState([]);
 
@@ -25,6 +26,8 @@ const ClassForm = ({ selectedClass, onRemoveClass }) => {
 
   return (
     <form className="space-y-4">
+      <BackButton onGoBack={() => onGoBack()} />
+
       <header className="flex items-center justify-between mb-4">
         <h4 className="text-3xl font-bold">{selectedClass.materia.nombre}</h4>
         <span
