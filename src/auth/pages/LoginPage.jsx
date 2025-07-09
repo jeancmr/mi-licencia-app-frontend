@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import InputForm from '../../components/shared/InputForm';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 
 const LoginPage = () => {
@@ -10,18 +9,11 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signIn, isAuthenticated, errors: loginErrors } = useAuth();
-  const navigate = useNavigate();
+  const { signIn, errors: loginErrors } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
     signIn(data);
   });
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/dashboard');
-    }
-  }, [isAuthenticated]);
 
   return (
     <div className="flex justify-center items-center h-screen from-blue-500 to-purple-500">
