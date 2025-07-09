@@ -1,7 +1,7 @@
 import Loading from './Loading';
-import ListClasses from '../pages/student/ListClasses';
 import Button from './Button';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
+import ListClasses from './ListClasses';
 
 const EnrollmentForm = ({
   classes,
