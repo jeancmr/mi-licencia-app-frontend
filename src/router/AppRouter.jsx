@@ -1,12 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
-import { DashBoardPage, ProfilePage, HomePage } from '../ui/pages';
-import EnrollmentPage from '../user/pages/student/EnrollmentPage';
-import ListClasses from '../user/pages/professor/ListClasses';
-import ListAttendance from '../user/pages/professor/ListAttendance';
-import PublicRoute from './PublicRoute';
+import { ProtectedRoute, PublicRoute } from './';
+import { DashBoardPage, ProfilePage, PageNotFound } from '../ui/pages';
 import { LoginPage, RegisterPage } from '../auth/pages';
-import PageNotFound from '../ui/pages/PageNotFound';
+import { EnrollmentPage } from '../user/pages/student';
+import { ListAttendance, ListClasses } from '../user/pages/professor';
 
 const AppRouter = () => {
   return (

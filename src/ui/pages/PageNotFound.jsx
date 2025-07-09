@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Main } from '../components';
 
 const PageNotFound = () => {
   return (
