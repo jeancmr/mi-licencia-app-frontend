@@ -1,9 +1,9 @@
 import ClassCard from '../../components/ClassCard';
 
-const ListClasses = ({ clases, selectedClase, handleClaseClick, register }) => {
+const ListClasses = ({ classes, selectedClase, handleClaseClick, register }) => {
   return (
     <div className="grid grid-cols-2 gap-4">
-      {clases.map((clase) => (
+      {classes.map((clase) => (
         <ClassCard
           key={clase.id}
           clase={clase}

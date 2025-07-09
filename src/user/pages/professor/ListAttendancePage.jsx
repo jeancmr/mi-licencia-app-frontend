@@ -4,7 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import AttendanceForm from './AttendanceForm';
 import ClassCard from '../../components/ClassCard';
 
-const ListAttendance = () => {
+const ListAttendancePage = () => {
   const { user } = useAuth();
 
   const { classes, isLoading } = useClasses('professor', user.user.id, true);
@@ -47,4 +47,4 @@ const ListAttendance = () => {
   );
 };
 
-export default ListAttendance;
+export default ListAttendancePage;

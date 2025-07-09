@@ -1,3 +1,3 @@
 export { default as AttendanceForm } from './AttendanceForm';
-export { default as ListAttendance } from './ListAttendance';
-export { default as ListClasses } from './ListClasses';
+export { default as ListAttendancePage } from './ListAttendancePage';
+export { default as ListClassesPage } from './ListClassesPage';

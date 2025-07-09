@@ -21,7 +21,7 @@ const EnrollmentForm = ({
         <Loading />
       ) : (
         <ListClasses
-          clases={classes}
+          classes={classes}
           selectedClase={selectedClassId}
           handleClaseClick={onClassSelect}
           register={register}

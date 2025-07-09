@@ -3,7 +3,7 @@ import { ProtectedRoute, PublicRoute } from './';
 import { DashBoardPage, ProfilePage, PageNotFound } from '../ui/pages';
 import { LoginPage, RegisterPage } from '../auth/pages';
 import { EnrollmentPage } from '../user/pages/student';
-import { ListAttendance, ListClasses } from '../user/pages/professor';
+import { ListAttendancePage, ListClassesPage } from '../user/pages/professor';
 
 const AppRouter = () => {
   return (
@@ -18,8 +18,8 @@ const AppRouter = () => {
         <Route path="/dashboard" element={<DashBoardPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/enrollment" element={<EnrollmentPage />} />
-        <Route path="/assigned_Classes" element={<ListClasses />} />
-        <Route path="/attendance" element={<ListAttendance />} />
+        <Route path="/assigned_classes" element={<ListClassesPage />} />
+        <Route path="/attendance" element={<ListAttendancePage />} />
       </Route>
 
       <Route path="*" element={<PageNotFound />} />

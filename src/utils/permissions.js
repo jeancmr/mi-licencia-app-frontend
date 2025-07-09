@@ -9,7 +9,7 @@ export const rolePermissions = {
   profesor: [
     {
       id: 1,
-      name: 'assigned_Classes',
+      name: 'assigned_classes',
       description: 'Mis Clases',
     },
     {

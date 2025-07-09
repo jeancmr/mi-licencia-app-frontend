@@ -2,7 +2,7 @@ import { useClasses } from '../../hooks/useClasses';
 import ClassCard from '../../components/ClassCard';
 import { useAuth } from '../../../context/AuthContext';
 
-const ListClasses = () => {
+const ListClassesPage = () => {
   const { user } = useAuth();
   const { classes, isLoading } = useClasses('professor', user.user.id);
 
@@ -23,4 +23,4 @@ const ListClasses = () => {
   );
 };
 
-export default ListClasses;
+export default ListClassesPage;
