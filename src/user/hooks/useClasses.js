@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getClasses } from '../api/classes';
+import { getClasses, removeClass } from '../api/classes';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
-import { showAlert } from '../../utils/alertMessage';
+import { showAlert, showConfirmation } from '../../utils/alertMessage';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -42,6 +42,29 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
     }
   };
 
+  const handleRemoveClass = async (classId) => {
+    try {
+      setIsLoading(true);
+      const result = await showConfirmation(
+        '¿Seguro que deseas eliminar la clase?',
+        'Esta acción no se puede deshacer',
+        'warning'
+      );
+
+      if (result.isConfirmed) {
+        await removeClass(classId);
+        showAlert('Success', 'Clase eliminada correctamente', 'success');
+        fetchClasses();
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error removing class:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchClasses();
   }, [userType, userId, filterToday]);
@@ -50,5 +73,6 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
     classes,
     isLoading,
     fetchClasses,
+    onRemoveClass: handleRemoveClass,
   };
 };
