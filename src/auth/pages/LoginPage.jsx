@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/';
 import { AuthLayout } from '../layout/AuthLayout';
+import { AuthErrorMessage } from '../components/';
 import InputForm from '../../components/shared/InputForm';
 
 const LoginPage = () => {
@@ -35,11 +36,8 @@ const LoginPage = () => {
           required={true}
           error={errors.contrasena}
         />
-        {loginErrors?.map((error, index) => (
-          <p key={index} className="text-red-500">
-            {error}
-          </p>
-        ))}
+
+        <AuthErrorMessage authError={loginErrors} />
 
         <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
           Iniciar sesión
@@ -55,4 +53,5 @@ const LoginPage = () => {
     </AuthLayout>
   );
 };
+
 export default LoginPage;

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 import { AuthLayout } from '../layout/AuthLayout';
+import { AlertMessage, AuthErrorMessage } from '../components/';
+import { useAlert, useAuth } from '../hooks/';
 import InputForm from '../../components/shared/InputForm';
 
 const RegisterPage = () => {
@@ -12,30 +12,12 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
   const { signUp, errors: registerErrors } = useAuth();
-  const [alert, setAlert] = useState({
-    message: '',
-    color: '',
-  });
+  const { alert, onAlert } = useAlert();
 
   const onSubmit = handleSubmit(async (data) => {
     const res = await signUp(data);
-    setAlert({
-      message: res ? 'Usuario registrado correctamente' : 'Error al registrar el usuario:',
-      color: res ? 'green' : 'red',
-    });
+    onAlert(res);
   });
-
-  useEffect(() => {
-    if (alert) {
-      const timer = setTimeout(() => {
-        setAlert({
-          message: '',
-          color: '',
-        });
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [alert]);
 
   return (
     <AuthLayout title={'Registrarse'}>
@@ -81,19 +63,16 @@ const RegisterPage = () => {
           error={errors.contrasena}
         />
 
-        {alert.message && <p className={`text-${alert.color}-500`}>{alert.message}</p>}
+        {alert.message && <AlertMessage message={alert.message} />}
 
-        {registerErrors?.map((error, index) => (
-          <p key={index} className="text-red-500">
-            {error}
-          </p>
-        ))}
+        <AuthErrorMessage authError={registerErrors} />
+
         <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
           Registrar usuario
         </button>
       </form>
 
-      <p className="">
+      <p>
         ¿Ya tienes una cuenta?
         <Link to="/login" className="text-blue-500 hover:underline">
           Inicia sesión
@@ -102,4 +81,5 @@ const RegisterPage = () => {
     </AuthLayout>
   );
 };
+
 export default RegisterPage;
