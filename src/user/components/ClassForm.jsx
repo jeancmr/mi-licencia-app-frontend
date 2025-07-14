@@ -11,6 +11,7 @@ const ClassForm = ({ selectedClass, onRemoveClass, onGoBack }) => {
 
       <header className="flex items-center justify-between mb-4">
         <h4 className="text-3xl font-bold">{signatureName}</h4>
+
         {selectedClass?.id && (
           <button
             onClick={() => onRemoveClass(selectedClass?.id)}

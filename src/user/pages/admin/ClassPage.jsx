@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button, ClassList, Loading } from '../../components';
 import { useClasses } from '../../hooks';
 import ClassForm from '../../components/ClassForm';
 
 const ClassPage = () => {
-  const { classes, isLoading: isLoadingClasses, onRemoveClass } = useClasses();
+  const { classes, isLoading: isLoadingClasses, onRemoveClass, fetchClasses } = useClasses();
   const [selectedClass, setSelectedClass] = useState(null);
   const [openClassForm, setOpenClassForm] = useState(false);
 

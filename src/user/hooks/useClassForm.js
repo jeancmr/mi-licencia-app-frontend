@@ -71,7 +71,7 @@ export const useClassForm = (selectedClass) => {
       );
     } catch (error) {
       console.error('Error submitting class form:', error);
-      showAlert('Error', 'Ocurrió un error al guardar la clase', 'error');
+      showAlert('Error', error.message ?? 'Ocurrió un error al guardar la clase', 'error');
     }
   };
 

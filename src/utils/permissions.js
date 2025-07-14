@@ -26,16 +26,11 @@ export const rolePermissions = {
     },
     {
       id: 2,
-      name: 'manage_all',
-      description: 'Gestionar todo',
-    },
-    {
-      id: 3,
       name: 'manage_classes',
       description: 'Gestionar clases',
     },
     {
-      id: 4,
+      id: 3,
       name: 'view_attendance',
       description: 'Asistencia',
     },

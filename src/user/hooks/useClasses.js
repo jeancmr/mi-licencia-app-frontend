@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getClasses, removeClass } from '../api/classes';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
 import { showAlert, showConfirmation } from '../../utils/alertMessage';
+import { filterTodayClasses } from '../utils';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -14,7 +15,6 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
       setIsLoading(true);
       let url = `${API_URL}/clases`;
 
-      // If it's a professor, fetch their assigned classes
       if (userType === 'professor' && userId) {
         url = `${API_URL}/clases/professor/${userId}`;
       }
@@ -22,16 +22,7 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
       const response = await getClasses(url);
       let filteredClasses = response;
 
-      // Filter for today's classes if needed (for attendance)
-      if (filterToday) {
-        const today = new Date();
-        const day = today.getDate();
-        const month = today.getMonth() + 1;
-        const year = today.getFullYear();
-        const todayDate = `${month}/${day}/${year}`;
-
-        filteredClasses = response.filter((clase) => clase.fecha === todayDate);
-      }
+      if (filterToday) filteredClasses = filterTodayClasses(response);
 
       setClasses(filteredClasses);
     } catch (error) {
