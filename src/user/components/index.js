@@ -6,3 +6,4 @@ export { default as EnrollmentForm } from './EnrollmentForm';
 export { default as EnrollmentItem } from './EnrollmentItem';
 export { default as EnrollmentList } from './EnrollmentList';
 export { default as Loading } from './Loading';
+export { default as BackButton } from './BackButton';

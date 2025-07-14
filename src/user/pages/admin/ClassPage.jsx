@@ -39,6 +39,7 @@ const ClassPage = () => {
       ) : (
         <>
           <ClassList classes={classes} handleClaseClick={handleSelectedClass} />
+
           <div className="sticky bottom-0">
             <Button onClick={() => setOpenClassForm(!openClassForm)} className="w-full mt-0">
               Registrar clase

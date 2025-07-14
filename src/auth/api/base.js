@@ -40,6 +40,29 @@ export const post = async (url, requestData) => {
   }
 };
 
+export const update = async (url, requestData) => {
+  try {
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Ocurrió un error');
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 export const deleteItem = async (url) => {
   try {
     const response = await fetch(API_URL + url, {

@@ -1,4 +1,4 @@
-import { get, deleteItem } from '../../auth/api/base';
+import { get, deleteItem, post, update } from '../../auth/api/base';
 
 export const getClasses = async (url) => {
   try {
@@ -20,6 +20,26 @@ export const removeClass = async (classId) => {
     return response.data;
   } catch (error) {
     console.error('Error removing class', error.message);
+    throw error;
+  }
+};
+
+export const createClass = async (url, classData) => {
+  try {
+    const response = await post(url, classData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating class', error.message);
+    throw error;
+  }
+};
+
+export const updateClass = async (url, classData) => {
+  try {
+    const response = await update(url, classData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating class', error.message);
     throw error;
   }
 };
