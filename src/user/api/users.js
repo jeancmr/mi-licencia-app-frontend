@@ -8,3 +8,12 @@ export const getUsersByRol = async (role) => {
     console.error('Error fetched classes', error.message);
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const response = await get(`${API_URL}/usuarios/`);
+    return response;
+  } catch (error) {
+    console.error('Error fetched classes', error.message);
+  }
+};

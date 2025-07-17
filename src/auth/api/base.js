@@ -9,6 +9,9 @@ export const get = async (url) => {
       },
       credentials: 'include',
     });
+
+    if (!response.ok) throw new Error(data.message || 'Ocurrió un error');
+
     const data = await response.json();
 
     return data;
