@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getEnrollments, deleteEnrollment, generateEnrollment } from '../api/enrollment';
-import { showAlert, showConfirmation } from '../../utils/alertMessage';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
+import { deleteEnrollment, generateEnrollment, getEnrollments } from '../api';
+import { showAlert, showConfirmation } from '../../../utils/alertMessage';
 
 const API_URL = import.meta.env.VITE_API_URL;
 

@@ -1,5 +1,5 @@
-import { useUserForm } from '../hooks/useUserForm';
-import { BackButton, Button } from './';
+import { BackButton, Button } from '../../components';
+import { useUserForm } from '../hooks';
 
 const UserForm = ({ selectedUser, onDeSelectUser, onUpdateUser }) => {
   const { formData, handleChange, onSubmit } = useUserForm(selectedUser, onUpdateUser);
@@ -61,11 +61,6 @@ const UserForm = ({ selectedUser, onDeSelectUser, onUpdateUser }) => {
             onChange={handleChange}
             value={formData.rol}
           >
-            {/* {professors?.map((professor) => (
-              <option key={professor.id} value={professor.id} className="text-white">
-                {professor.nombre}
-              </option>
-            ))} */}
             <option value="admin">Administrador</option>
             <option value="estudiante">Estudiante</option>
             <option value="profesor">Profesor</option>

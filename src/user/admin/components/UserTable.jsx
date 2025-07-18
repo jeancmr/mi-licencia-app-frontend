@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-table';
 import React from 'react';
 
-const TableUsers = ({ data, onSelectUser }) => {
+const UserTable = ({ data, onSelectUser }) => {
   const [sorting, setSorting] = React.useState([]);
   const columns = [
     { accessorKey: 'id', header: 'ID' },
@@ -84,4 +84,4 @@ const TableUsers = ({ data, onSelectUser }) => {
   );
 };
 
-export default React.memo(TableUsers);
+export default React.memo(UserTable);

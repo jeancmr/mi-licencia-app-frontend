@@ -1,6 +1,6 @@
-import TableUsers from '../../components/TableUsers';
-import { Loading, UserForm } from '../../components/';
-import { useUser } from '../../hooks/useUser';
+import { Loading } from '../../components';
+import { UserForm, UserTable } from '../components';
+import { useUser } from '../hooks';
 
 const ManageUsersPage = () => {
   const { users, isLoading, selectedUser, onSelectUser, onDeSelectUser, onUpdateUser } = useUser();
@@ -20,7 +20,7 @@ const ManageUsersPage = () => {
       {isLoading && !selectedUser?.id && <Loading />}
 
       {!isLoading && !selectedUser?.id && (
-        <TableUsers data={users} onSelectUser={onSelectUser} onDeSelectUser={onDeSelectUser} />
+        <UserTable data={users} onSelectUser={onSelectUser} onDeSelectUser={onDeSelectUser} />
       )}
     </div>
   );

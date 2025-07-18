@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useReducer, useState } from 'react';
-import { createClass, updateClass, getAsignatures, getUsersByRol, getUsers } from '../api';
-import { showAlert } from '../../utils/alertMessage';
+import { useCallback, useEffect, useReducer } from 'react';
+import { getUsers } from '../../api';
 import { userReducer } from './userReducer';
-const API_URL = import.meta.env.VITE_API_URL;
 
 const initialState = {
   users: [],

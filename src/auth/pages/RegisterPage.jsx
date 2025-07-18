@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthLayout } from '../layout/AuthLayout';
-import { AlertMessage, AuthErrorMessage } from '../components/';
+import { AlertMessage, AuthErrorMessage, InputForm } from '../components/';
 import { useAlert, useAuth } from '../hooks/';
-import InputForm from '../../components/shared/InputForm';
 
 const RegisterPage = () => {
   const {

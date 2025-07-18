@@ -2,10 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoute, PublicRoute } from './';
 import { DashBoardPage, ProfilePage, PageNotFound } from '../ui/pages';
 import { LoginPage, RegisterPage } from '../auth/pages';
-import { EnrollmentPage } from '../user/pages/student';
-import { ListAttendancePage, ListClassesPage } from '../user/pages/professor';
-import ClassPage from '../user/pages/admin/ClassPage';
-import ManageUsersPage from '../user/pages/admin/ManageUsersPage';
+import { EnrollmentPage } from '../user/student/pages';
+import { ListAttendancePage, ListClassesPage } from '../user/professor/pages';
+import { ClassPage, ManageUsersPage } from '../user/admin/pages';
 
 const AppRouter = () => {
   return (

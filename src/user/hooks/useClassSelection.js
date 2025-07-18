@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ENROLLMENT_MESSAGES } from '../constants/messages';
+import { ENROLLMENT_MESSAGES } from '../student/constants/messages';
 import { showAlert } from '../../utils/alertMessage';
 
 export const useClassSelection = () => {

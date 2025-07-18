@@ -1,4 +1,4 @@
-import { useClassForm } from '../hooks/';
+import { useClassForm } from '../hooks';
 import { BackButton, Button } from './';
 
 const ClassForm = ({ selectedClass, onRemoveClass, onGoBack }) => {

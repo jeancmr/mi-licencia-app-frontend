@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/';
 import { AuthLayout } from '../layout/AuthLayout';
-import { AuthErrorMessage } from '../components/';
-import InputForm from '../../components/shared/InputForm';
+import { AuthErrorMessage, InputForm } from '../components/';
 
 const LoginPage = () => {
   const {

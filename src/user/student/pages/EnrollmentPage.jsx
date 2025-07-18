@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { EnrollmentForm, EnrollmentList } from '../components';
+import { useEnrollments } from '../hooks';
 import { useAuth } from '../../../auth/hooks/useAuth';
-import { useClassSelection, useClasses, useEnrollments } from '../../hooks/';
-import { ENROLLMENT_MESSAGES } from '../../constants/messages';
-import { EnrollmentForm, EnrollmentList, Button } from '../../components/';
+import Button from '../../components/Button';
+import { ENROLLMENT_MESSAGES } from '../constants/messages';
+import { useClasses, useClassSelection } from '../../hooks';
 
 const EnrollmentPage = () => {
   const { user } = useAuth();

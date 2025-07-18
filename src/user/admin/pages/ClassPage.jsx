@@ -1,7 +1,6 @@
-import { useMemo, useState } from 'react';
-import { Button, ClassList, Loading } from '../../components';
+import { useState } from 'react';
 import { useClasses } from '../../hooks';
-import ClassForm from '../../components/ClassForm';
+import { ClassForm, ClassList, Loading } from '../../components';
 
 const ClassPage = () => {
   const { classes, isLoading: isLoadingClasses, onRemoveClass, fetchClasses } = useClasses();
@@ -41,9 +40,9 @@ const ClassPage = () => {
           <ClassList classes={classes} handleClaseClick={handleSelectedClass} />
 
           <div className="sticky bottom-0">
-            <Button onClick={() => setOpenClassForm(!openClassForm)} className="w-full mt-0">
+            {/* <Button onClick={() => setOpenClassForm(!openClassForm)} className="w-full mt-0">
               Registrar clase
-            </Button>
+            </Button> */}
           </div>
         </>
       )}
