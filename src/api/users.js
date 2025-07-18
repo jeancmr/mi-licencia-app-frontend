@@ -1,4 +1,4 @@
-import { API_URL, deleteItem, get, update } from '../../auth/api/base';
+import { API_URL, deleteItem, get, post, update } from '../auth/api/base';
 
 export const getUsersByRol = async (role) => {
   try {

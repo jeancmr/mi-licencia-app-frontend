@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { showAlert, showConfirmation } from '../../utils/alertMessage';
-import { ENROLLMENT_MESSAGES } from '../student/constants/messages';
 import { getClasses, removeClass } from '../api';
-import { filterTodayClasses } from '../utils';
+import { filterTodayClasses, showAlert, showConfirmation } from '../utils';
+import { ENROLLMENT_MESSAGES } from '../user/student/constants/messages';
 
 const API_URL = import.meta.env.VITE_API_URL;
 

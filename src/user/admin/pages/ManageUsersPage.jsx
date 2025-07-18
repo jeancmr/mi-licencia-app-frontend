@@ -1,4 +1,4 @@
-import { Loading } from '../../components';
+import { Loading } from '../../../components';
 import { UserForm, UserTable } from '../components';
 import { useUser } from '../hooks';
 

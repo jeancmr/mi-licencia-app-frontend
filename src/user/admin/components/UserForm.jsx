@@ -1,4 +1,4 @@
-import { BackButton, Button } from '../../components';
+import { BackButton, Button } from '../../../components';
 import { useUserForm } from '../hooks';
 
 const UserForm = ({ selectedUser, onDeSelectUser, onUpdateUser }) => {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer } from 'react';
-import { deleteUser, getUsers } from '../../api';
+import { deleteUser, getUsers } from '../../../api/users';
+import { showAlert, showConfirmation } from '../../../utils';
 import { userReducer } from './userReducer';
-import { showAlert, showConfirmation } from '../../../utils/alertMessage';
 
 const initialState = {
   users: [],
@@ -42,7 +42,6 @@ export const useUser = () => {
   };
 
   const handleDeleteUser = async (userId) => {
-    // dispatch({ type: 'DELETE_USER', payload: userId });
     try {
       const result = await showConfirmation(
         '¿Seguro que desea eliminar el usuario?',
@@ -53,7 +52,8 @@ export const useUser = () => {
       if (result.isConfirmed) {
         await deleteUser(userId);
         showAlert('Success', 'Usuario eliminado correctamente', 'success');
-        fetchUsers();
+        dispatch({ type: 'DELETE_USER', payload: userId });
+        // fetchUsers();
       }
     } catch (error) {
       console.error('Error deleting user:', error);

@@ -1,6 +1,6 @@
 import { useAuth } from '../../../auth/hooks/useAuth';
-import { ClassList } from '../../components';
-import { useClasses } from '../../hooks';
+import { ClassList } from '../../../components';
+import { useClasses } from '../../../hooks';
 
 const ListClassesPage = () => {
   const { user } = useAuth();

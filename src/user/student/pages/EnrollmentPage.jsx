@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { EnrollmentForm, EnrollmentList } from '../components';
 import { useEnrollments } from '../hooks';
 import { useAuth } from '../../../auth/hooks/useAuth';
-import Button from '../../components/Button';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
-import { useClasses, useClassSelection } from '../../hooks';
+import { useClasses, useClassSelection } from '../../../hooks';
+import { Button } from '../../../components';
 
 const EnrollmentPage = () => {
   const { user } = useAuth();

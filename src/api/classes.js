@@ -1,4 +1,4 @@
-import { get, deleteItem, post, update } from '../../auth/api/base';
+import { deleteItem, get, post, update } from '../auth/api/base';
 
 export const getClasses = async (url) => {
   try {

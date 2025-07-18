@@ -1,4 +1,4 @@
-import { Button, ClassList, Loading } from '../../components';
+import { Button, ClassList, Loading } from '../../../components';
 import { ENROLLMENT_MESSAGES } from '../constants/messages';
 
 const EnrollmentForm = ({

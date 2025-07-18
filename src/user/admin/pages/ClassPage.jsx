@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useClasses } from '../../hooks';
-import { ClassForm, ClassList, Loading } from '../../components';
+import { ClassForm, ClassList, Loading } from '../../../components';
+import { useClasses } from '../../../hooks';
 
 const ClassPage = () => {
   const { classes, isLoading: isLoadingClasses, onRemoveClass, fetchClasses } = useClasses();

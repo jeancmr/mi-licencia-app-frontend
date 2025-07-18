@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { generateAttendance } from '../../api';
+import { generateAttendance } from '../../../api/attendance';
 import { showAlert } from '../../../utils/alertMessage';
 
 const API_URL = import.meta.env.VITE_API_URL;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ENROLLMENT_MESSAGES } from '../student/constants/messages';
-import { showAlert } from '../../utils/alertMessage';
+import { showAlert } from '../utils';
+import { ENROLLMENT_MESSAGES } from '../user/student/constants/messages';
 
 export const useClassSelection = () => {
   const [selectedClassId, setSelectedClassId] = useState(null);

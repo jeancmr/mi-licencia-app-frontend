@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { updateUser } from '../../api';
-import { showAlert } from '../../../utils/alertMessage';
+import { showAlert } from '../../../utils';
+import { updateUser } from '../../../api';
 
 export const useUserForm = (selectedUser, onUpdateUser) => {
   const [formData, setFormData] = useState({

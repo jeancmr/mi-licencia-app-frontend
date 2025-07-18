@@ -1,4 +1,4 @@
-import { API_URL, get } from '../../auth/api/base';
+import { API_URL, get } from '../auth/api/base';
 
 export const getAsignatures = async () => {
   try {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createClass, updateClass, getAsignatures, getUsersByRol } from '../api';
-import { showAlert } from '../../utils/alertMessage';
-import { formateClassData } from '../utils';
+import { formateClassData, showAlert } from '../utils';
 
 const API_URL = import.meta.env.VITE_API_URL;
 

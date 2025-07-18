@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../../../auth/hooks/useAuth';
-import { ClassList } from '../../components';
-import { useClasses } from '../../hooks';
+import { useClasses } from '../../../hooks';
+import { ClassList } from '../../../components';
 import AttendanceForm from '../components/AttendanceForm';
 
 const ListAttendancePage = () => {
