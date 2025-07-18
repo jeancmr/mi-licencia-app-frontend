@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-table';
 import React from 'react';
 
-const TableUsers = ({ data }) => {
+const TableUsers = ({ data, onSelectUser }) => {
   const [sorting, setSorting] = React.useState([]);
   const columns = [
     { accessorKey: 'id', header: 'ID' },
@@ -19,7 +19,7 @@ const TableUsers = ({ data }) => {
       cell: ({ row }) => (
         <div className="flex space-x-2">
           <button
-            onClick={() => console.log('Edit', row.original)}
+            onClick={() => onSelectUser(row.original)}
             className="text-blue-600 hover:text-blue-800 cursor-pointer"
             title="Edit"
           >
@@ -48,15 +48,15 @@ const TableUsers = ({ data }) => {
 
   return (
     <div className="overflow-y-auto max-h-[400px]">
-      <table className="min-w-full bg-white border border-gray-300 rounded shadow">
-        <thead className="bg-gray-100">
+      <table className="min-w-full bg-zinc-700  rounded-md shadow">
+        <thead className="bg-zinc-900">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
-                  className="px-6 py-3 text-left text-sm font-medium text-gray-700 cursor-pointer select-none"
+                  className="px-6 py-3 text-left text-sm font-medium text-white cursor-pointer select-none"
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
                   {{
@@ -68,11 +68,11 @@ const TableUsers = ({ data }) => {
             </tr>
           ))}
         </thead>
-        <tbody className="text-gray-700">
+        <tbody className="text-white">
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-gray-50">
+            <tr key={row.id} className="hover:bg-zinc-600">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="px-6 py-4 text-sm border-t border-gray-200">
+                <td key={cell.id} className="px-6 py-4 text-sm border-t border-zinc-900">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
