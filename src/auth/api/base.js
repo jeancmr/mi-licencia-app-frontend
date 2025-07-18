@@ -68,7 +68,7 @@ export const update = async (url, requestData) => {
 
 export const deleteItem = async (url) => {
   try {
-    const response = await fetch(API_URL + url, {
+    const response = await fetch(url, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

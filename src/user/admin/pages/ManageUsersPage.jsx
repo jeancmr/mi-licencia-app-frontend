@@ -3,7 +3,15 @@ import { UserForm, UserTable } from '../components';
 import { useUser } from '../hooks';
 
 const ManageUsersPage = () => {
-  const { users, isLoading, selectedUser, onSelectUser, onDeSelectUser, onUpdateUser } = useUser();
+  const {
+    users,
+    isLoading,
+    selectedUser,
+    onSelectUser,
+    onDeSelectUser,
+    onUpdateUser,
+    onDeleteUser,
+  } = useUser();
 
   return (
     <div className="">
@@ -20,7 +28,7 @@ const ManageUsersPage = () => {
       {isLoading && !selectedUser?.id && <Loading />}
 
       {!isLoading && !selectedUser?.id && (
-        <UserTable data={users} onSelectUser={onSelectUser} onDeSelectUser={onDeSelectUser} />
+        <UserTable data={users} onSelectUser={onSelectUser} onDeleteUser={onDeleteUser} />
       )}
     </div>
   );

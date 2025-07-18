@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-table';
 import React from 'react';
 
-const UserTable = ({ data, onSelectUser }) => {
+const UserTable = ({ data, onSelectUser, onDeleteUser }) => {
   const [sorting, setSorting] = React.useState([]);
   const columns = [
     { accessorKey: 'id', header: 'ID' },
@@ -26,7 +26,7 @@ const UserTable = ({ data, onSelectUser }) => {
             ✏️
           </button>
           <button
-            onClick={() => console.log('Delete', row.original)}
+            onClick={() => onDeleteUser(row.original.id)}
             className="text-red-600 hover:text-red-800 cursor-pointer"
             title="Delete"
           >
