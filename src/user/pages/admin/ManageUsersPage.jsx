@@ -1,39 +1,27 @@
-import { useEffect, useState } from 'react';
-import { getUsers } from '../../api/users';
 import TableUsers from '../../components/TableUsers';
-import { Loading } from '../../components/';
+import { Loading, UserForm } from '../../components/';
+import { useUser } from '../../hooks/useUser';
 
 const ManageUsersPage = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedUser, setSelectedUser] = useState(null);
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getUsers();
-      setUsers(data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSelectUser = (user) => {
-    console.log('Selected user:', user);
-    setSelectedUser(user);
-  };
+  const { users, isLoading, selectedUser, onSelectUser, onDeSelectUser, onUpdateUser } = useUser();
 
   return (
     <div className="">
       <h1 className="text-3xl font-bold mb-6">Administrar usuarios</h1>
 
-      {isLoading ? <Loading /> : <TableUsers data={users} onSelectUser={handleSelectUser} />}
+      {selectedUser?.id && (
+        <UserForm
+          selectedUser={selectedUser}
+          onDeSelectUser={onDeSelectUser}
+          onUpdateUser={onUpdateUser}
+        />
+      )}
+
+      {isLoading && !selectedUser?.id && <Loading />}
+
+      {!isLoading && !selectedUser?.id && (
+        <TableUsers data={users} onSelectUser={onSelectUser} onDeSelectUser={onDeSelectUser} />
+      )}
     </div>
   );
 };

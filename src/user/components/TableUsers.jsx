@@ -83,4 +83,5 @@ const TableUsers = ({ data, onSelectUser }) => {
     </div>
   );
 };
-export default TableUsers;
+
+export default React.memo(TableUsers);

@@ -7,3 +7,4 @@ export { default as EnrollmentItem } from './EnrollmentItem';
 export { default as EnrollmentList } from './EnrollmentList';
 export { default as Loading } from './Loading';
 export { default as BackButton } from './BackButton';
+export { default as UserForm } from './UserForm';
