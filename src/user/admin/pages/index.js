@@ -1,2 +1,2 @@
-export { default as ClassPage } from './ClassPage';
+export { default as ManageClassPage } from './ManageClassPage';
 export { default as ManageUsersPage } from './ManageUsersPage';

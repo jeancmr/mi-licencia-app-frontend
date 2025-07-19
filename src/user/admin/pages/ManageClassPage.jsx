@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ClassForm, ClassList, Loading } from '../../../components';
+import { Button, ClassForm, ClassList, Loading } from '../../../components';
 import { useClasses } from '../../../hooks';
 
-const ClassPage = () => {
+const ManageClassPage = () => {
   const { classes, isLoading: isLoadingClasses, onRemoveClass, fetchClasses } = useClasses();
   const [selectedClass, setSelectedClass] = useState(null);
   const [openClassForm, setOpenClassForm] = useState(false);
@@ -34,19 +34,20 @@ const ClassPage = () => {
           selectedClass={selectedClass}
           onRemoveClass={handleRemoveClass}
           onGoBack={handleGoBack}
+          onRefreshClasses={fetchClasses}
         />
       ) : (
         <>
           <ClassList classes={classes} handleClaseClick={handleSelectedClass} />
 
           <div className="sticky bottom-0">
-            {/* <Button onClick={() => setOpenClassForm(!openClassForm)} className="w-full mt-0">
+            <Button onClick={() => setOpenClassForm(!openClassForm)} className="w-full mt-0">
               Registrar clase
-            </Button> */}
+            </Button>
           </div>
         </>
       )}
     </div>
   );
 };
-export default ClassPage;
+export default ManageClassPage;

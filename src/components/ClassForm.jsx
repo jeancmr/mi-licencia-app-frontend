@@ -1,9 +1,11 @@
 import { useClassForm } from '../hooks';
 import { BackButton, Button } from './';
 
-const ClassForm = ({ selectedClass, onRemoveClass, onGoBack }) => {
-  const { formData, handleChange, signatureName, professors, asignatures, onSubmit } =
-    useClassForm(selectedClass);
+const ClassForm = ({ selectedClass, onRemoveClass, onGoBack, onRefreshClasses }) => {
+  const { formData, handleChange, signatureName, professors, asignatures, onSubmit } = useClassForm(
+    selectedClass,
+    onRefreshClasses
+  );
 
   return (
     <form className="space-y-4" onSubmit={onSubmit}>

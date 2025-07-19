@@ -4,7 +4,7 @@ import { formateClassData, showAlert } from '../utils';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const useClassForm = (selectedClass) => {
+export const useClassForm = (selectedClass, onRefreshClasses) => {
   const [professors, setProfessors] = useState([]);
   const [asignatures, setAsignatures] = useState([]);
 
@@ -63,6 +63,7 @@ export const useClassForm = (selectedClass) => {
         await createClass(`${API_URL}/clases`, formattedData);
       }
 
+      onRefreshClasses();
       showAlert(
         `Clase ${selectedClass?.id ? 'actualizada' : 'creada'}`,
         `La clase ha sido ${selectedClass?.id ? 'actualizada' : 'creada'} correctamente`,
