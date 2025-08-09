@@ -17,7 +17,7 @@ const ListClassesPage = () => {
       <BackButton onGoBack={() => navigate(-1)} />
 
       <h1 className="text-3xl font-bold mb-6 mt-2">Lista de clases</h1>
-      <ClassList classes={classes} showProfessor={true} />
+      <ClassList classes={classes} />
     </div>
   );
 };
