@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { showAlert } from '../utils';
-import { ENROLLMENT_MESSAGES } from '../user/student/constants/messages';
 
 export const useClassSelection = () => {
   const [selectedClassId, setSelectedClassId] = useState(null);
@@ -34,7 +33,7 @@ export const useClassSelection = () => {
       (errors) => {
         console.log('Form errors:', errors);
         if (errors.claseId) {
-          showAlert('Error', ENROLLMENT_MESSAGES.ERRORS.MUST_SELECT_CLASS, 'error');
+          showAlert('Error', 'Debe seleccionar una clase', 'error');
         }
       }
     );

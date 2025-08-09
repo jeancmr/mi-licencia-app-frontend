@@ -10,7 +10,7 @@ export const get = async (url) => {
       credentials: 'include',
     });
 
-    if (!response.ok) throw new Error(data.message || 'Ocurrió un error');
+    if (!response.ok) throw new Error('Error en la solicitud: ' + response.statusText);
 
     const data = await response.json();
 

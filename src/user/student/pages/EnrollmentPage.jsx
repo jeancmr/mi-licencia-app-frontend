@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { EnrollmentForm, EnrollmentList } from '../components';
 import { useEnrollments } from '../hooks';
 import { useAuth } from '../../../auth/hooks/useAuth';
-import { ENROLLMENT_MESSAGES } from '../constants/messages';
 import { useClasses, useClassSelection } from '../../../hooks';
 import { Button } from '../../../components';
 
@@ -38,9 +37,7 @@ const EnrollmentPage = () => {
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">
-        {showEnrolledClasses
-          ? ENROLLMENT_MESSAGES.TITLES.ENROLLED_CLASSES
-          : ENROLLMENT_MESSAGES.TITLES.REGISTER_CLASS}
+        {showEnrolledClasses ? 'Registrar clase' : 'Clases inscritas'}
       </h1>
 
       {showEnrolledClasses ? (
@@ -57,9 +54,7 @@ const EnrollmentPage = () => {
       )}
 
       <Button className="mt-6" onClick={() => setShowEnrolledClasses(!showEnrolledClasses)}>
-        {showEnrolledClasses
-          ? ENROLLMENT_MESSAGES.BUTTONS.HIDE_CLASSES
-          : ENROLLMENT_MESSAGES.BUTTONS.SHOW_CLASSES}
+        {showEnrolledClasses ? 'Ocultar clases' : 'Ver clases inscritas'}
       </Button>
     </>
   );

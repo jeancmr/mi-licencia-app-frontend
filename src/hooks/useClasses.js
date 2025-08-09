@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getClasses, removeClass } from '../api';
 import { filterTodayClasses, showAlert, showConfirmation } from '../utils';
-import { ENROLLMENT_MESSAGES } from '../user/student/constants/messages';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,7 +25,7 @@ export const useClasses = (userType = 'general', userId = null, filterToday = fa
       setClasses(filteredClasses);
     } catch (error) {
       console.error('Error fetching classes:', error);
-      showAlert('Error', ENROLLMENT_MESSAGES.ERRORS.FETCH_CLASSES_ERROR, 'error');
+      showAlert('Error', 'Error al obtener las clases', 'error');
     } finally {
       setIsLoading(false);
     }

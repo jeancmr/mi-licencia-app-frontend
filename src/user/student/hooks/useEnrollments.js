@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { ENROLLMENT_MESSAGES } from '../constants/messages';
 import { deleteEnrollment, generateEnrollment, getEnrollments } from '../api';
 import { showAlert, showConfirmation } from '../../../utils/alertMessage';
 
@@ -18,7 +17,7 @@ export const useEnrollments = (userId) => {
       setEnrollments(data);
     } catch (error) {
       console.error('Error fetching enrollments:', error);
-      showAlert('Error', ENROLLMENT_MESSAGES.ERRORS.FETCH_ENROLLMENTS_ERROR, 'error');
+      showAlert('Error', 'Error al obtener las inscripciones', 'error');
     } finally {
       setIsLoading(false);
     }
@@ -27,11 +26,7 @@ export const useEnrollments = (userId) => {
   const createEnrollment = async (enrollmentData) => {
     try {
       await generateEnrollment(`${API_URL}/inscripciones`, enrollmentData);
-      showAlert(
-        ENROLLMENT_MESSAGES.SUCCESS.ENROLLMENT_CREATED,
-        ENROLLMENT_MESSAGES.SUCCESS.ENROLLMENT_CREATED_DESCRIPTION,
-        'success'
-      );
+      showAlert('Inscripción exitosa', 'Has sido inscrito/a en la clase correctamente.', 'success');
       await fetchEnrollments();
       return true;
     } catch (error) {
@@ -44,16 +39,16 @@ export const useEnrollments = (userId) => {
   const removeEnrollment = async (enrollmentId) => {
     try {
       const result = await showConfirmation(
-        ENROLLMENT_MESSAGES.CONFIRMATIONS.DELETE_ENROLLMENT_TITLE,
-        ENROLLMENT_MESSAGES.CONFIRMATIONS.DELETE_ENROLLMENT_DESCRIPTION,
+        '¿Seguro que deseas eliminar la inscripción?',
+        'Esta acción no se puede deshacer',
         'warning'
       );
 
       if (result.isConfirmed) {
         await deleteEnrollment(`${API_URL}/inscripciones/${enrollmentId}`);
         showAlert(
-          ENROLLMENT_MESSAGES.SUCCESS.ENROLLMENT_DELETED,
-          ENROLLMENT_MESSAGES.SUCCESS.ENROLLMENT_DELETED_DESCRIPTION,
+          'Inscripción eliminada',
+          'La inscripción se ha eliminado correctamente.',
           'success'
         );
         await fetchEnrollments();
