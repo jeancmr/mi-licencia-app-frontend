@@ -30,7 +30,7 @@ const ManageUsersPage = () => {
     <div className="">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Administrar usuarios</h1>
-        <Button className={selectedUser ? 'hidden' : ''} onClick={() => setShowForm(true)}>
+        <Button className={showForm ? 'hidden' : ''} onClick={() => setShowForm(true)}>
           Agregar usuario
         </Button>
       </header>
