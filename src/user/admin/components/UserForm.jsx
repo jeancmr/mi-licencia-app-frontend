@@ -1,20 +1,24 @@
 import { BackButton, Button } from '../../../components';
 import { useUserForm } from '../hooks';
 
-const UserForm = ({ selectedUser, onDeSelectUser, onUpdateUser }) => {
-  const { formData, handleChange, onSubmit } = useUserForm(selectedUser, onUpdateUser);
+const UserForm = ({ selectedUser, onCancelForm, onUpdateUser, onCreateUser }) => {
+  const { formData, handleChange, onSubmit } = useUserForm(
+    selectedUser,
+    onUpdateUser,
+    onCreateUser
+  );
 
   const submit = async (e) => {
-    await onSubmit(e);
-    onDeSelectUser();
+    const resp = await onSubmit(e);
+    if (resp.success) onCancelForm();
   };
 
   return (
     <form className="space-y-4" onSubmit={submit}>
-      <BackButton onGoBack={() => onDeSelectUser()} />
+      <BackButton onGoBack={() => onCancelForm()} />
 
       <header className="flex items-center justify-between mb-4">
-        <h4 className="text-3xl font-bold">{selectedUser.nombre}</h4>
+        <h4 className="text-3xl font-bold">{selectedUser?.nombre || 'Nuevo Usuario'}</h4>
       </header>
 
       <div className="grid grid-cols-3 mb-3 mx-2 gap-3">
@@ -52,6 +56,21 @@ const UserForm = ({ selectedUser, onDeSelectUser, onUpdateUser }) => {
             onChange={handleChange}
           />
         </div>
+
+        {!selectedUser?.id && (
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="aula">Contraseña</label>
+            <input
+              className="bg-gray-700 px-3 py-1 rounded-md"
+              id="contrasena"
+              name="contrasena"
+              type="password"
+              value={formData.contrasena}
+              onChange={handleChange}
+            />
+          </div>
+        )}
+
         <div className="flex flex-col gap-1.5">
           <label htmlFor="aula">Rol</label>
           <select

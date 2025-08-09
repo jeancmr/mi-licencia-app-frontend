@@ -7,7 +7,10 @@ export const userReducer = (state = {}, action) => {
       };
 
     case 'ADD_USER':
-      return [...state, action.payload];
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+      };
 
     case 'UPDATE_USER':
       return {

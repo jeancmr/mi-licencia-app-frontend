@@ -41,6 +41,10 @@ export const useUser = () => {
     dispatch({ type: 'UPDATE_USER', payload: updatedUser });
   };
 
+  const handleCreateUser = async (newUser) => {
+    dispatch({ type: 'ADD_USER', payload: newUser });
+  };
+
   const handleDeleteUser = async (userId) => {
     try {
       const result = await showConfirmation(
@@ -68,5 +72,6 @@ export const useUser = () => {
     onDeSelectUser: handleDeSelectUser,
     onUpdateUser: handleUpdateUser,
     onDeleteUser: handleDeleteUser,
+    onCreateUser: handleCreateUser,
   };
 };
