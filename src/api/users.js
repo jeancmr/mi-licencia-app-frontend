@@ -30,7 +30,7 @@ export const updateUser = async (id, userData) => {
 
 export const deleteUser = async (id) => {
   try {
-    const response = await deleteItem(`${API_URL}/usuarios/${id}`);
+    const response = await deleteItem(`/usuarios/${id}`);
     return response;
   } catch (error) {
     console.error('Error updating class', error.message);
