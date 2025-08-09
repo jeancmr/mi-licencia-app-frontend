@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useAuth } from '../../../auth/hooks/useAuth';
 import { useClasses } from '../../../hooks';
-import { ClassList } from '../../../components';
+import { BackButton, ClassList } from '../../../components';
 import AttendanceForm from '../components/AttendanceForm';
 
 const ListAttendancePage = () => {
@@ -11,6 +12,7 @@ const ListAttendancePage = () => {
   const [classSelected, setClassSelected] = useState(null);
   const [openAttendanceForm, setOpenAttendanceForm] = useState(false);
   const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
 
   const handleClassSelected = (clase) => {
     setClassSelected(clase);
@@ -31,7 +33,11 @@ const ListAttendancePage = () => {
           students={students}
         />
       ) : (
-        <ClassList classes={classes} handleClaseClick={handleClassSelected} />
+        <div>
+          <BackButton onGoBack={() => navigate(-1)} />
+
+          <ClassList classes={classes} handleClaseClick={handleClassSelected} />
+        </div>
       )}
     </>
   );

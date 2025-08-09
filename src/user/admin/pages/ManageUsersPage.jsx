@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Button, Loading } from '../../../components';
+import { useNavigate } from 'react-router';
+import { BackButton, Button, Loading } from '../../../components';
 import { UserForm, UserTable } from '../components';
 import { useUser } from '../hooks';
 
 const ManageUsersPage = () => {
   const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate();
   const {
     users,
     isLoading,
@@ -28,6 +30,8 @@ const ManageUsersPage = () => {
 
   return (
     <div className="">
+      <BackButton onGoBack={() => navigate(-1)} />
+
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Administrar usuarios</h1>
         <Button className={showForm ? 'hidden' : ''} onClick={() => setShowForm(true)}>

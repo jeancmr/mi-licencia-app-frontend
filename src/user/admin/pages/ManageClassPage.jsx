@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Button, ClassForm, ClassList, Loading } from '../../../components';
+import { useNavigate } from 'react-router';
+import { BackButton, Button, ClassForm, ClassList, Loading } from '../../../components';
 import { useClasses } from '../../../hooks';
 
 const ManageClassPage = () => {
   const { classes, isLoading: isLoadingClasses, onRemoveClass, fetchClasses } = useClasses();
   const [selectedClass, setSelectedClass] = useState(null);
   const [openClassForm, setOpenClassForm] = useState(false);
+  const navigate = useNavigate();
 
   const handleRemoveClass = (classId) => {
     onRemoveClass(classId);
@@ -38,6 +40,11 @@ const ManageClassPage = () => {
         />
       ) : (
         <>
+          <BackButton onGoBack={() => navigate(-1)} />
+
+          <header className="flex items-center justify-between mb-4">
+            <h1 className="text-3xl font-bold">Administrar Clases</h1>
+          </header>
           <ClassList classes={classes} handleClaseClick={handleSelectedClass} />
 
           <div className="sticky bottom-0">
