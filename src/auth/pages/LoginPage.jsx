@@ -18,7 +18,7 @@ const LoginPage = () => {
 
   return (
     <AuthLayout title="Iniciar Sesión">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="flex flex-col">
         <InputForm
           type="email"
           placeholder="Correo"
@@ -38,13 +38,13 @@ const LoginPage = () => {
 
         <AuthErrorMessage authError={loginErrors} />
 
-        <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
+        <button className="bg-indigo-500 px-4 py-2 rounded-sm mt-3 cursor-pointer mb-2 hover:bg-indigo-600 transition-colors">
           Iniciar sesión
         </button>
       </form>
 
       <p>
-        ¿No tienes cuenta?
+        ¿No tienes cuenta?{' '}
         <Link to="/register" className="text-blue-500 hover:underline">
           Regístrate
         </Link>

@@ -40,9 +40,14 @@ const EnrollmentPage = () => {
     <>
       <header>
         <BackButton onGoBack={() => navigate(-1)} style="absolute" />
-        <h1 className="text-3xl font-bold mb-6 mt-2">
-          {showEnrolledClasses ? 'Clases inscritas' : 'Registrar clase'}
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">
+            {showEnrolledClasses ? 'Clases inscritas' : 'Registrar clase'}
+          </h1>
+          <Button className="mt-6" onClick={() => setShowEnrolledClasses(!showEnrolledClasses)}>
+            {showEnrolledClasses ? 'Ocultar clases' : 'Ver clases inscritas'}
+          </Button>
+        </div>
       </header>
 
       {showEnrolledClasses ? (
@@ -57,10 +62,6 @@ const EnrollmentPage = () => {
           register={register}
         />
       )}
-
-      <Button className="mt-6" onClick={() => setShowEnrolledClasses(!showEnrolledClasses)}>
-        {showEnrolledClasses ? 'Ocultar clases' : 'Ver clases inscritas'}
-      </Button>
     </>
   );
 };

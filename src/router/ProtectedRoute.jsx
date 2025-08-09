@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../auth/hooks/useAuth';
-import { Main, NavBar } from '../ui/components/';
+import { Footer, Main, NavBar } from '../ui/components/';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -19,6 +19,7 @@ const ProtectedRoute = () => {
       <Main>
         <Outlet />
       </Main>
+      <Footer />
     </>
   );
 };

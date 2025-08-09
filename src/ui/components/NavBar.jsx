@@ -1,22 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
 
 const NavBar = () => {
   const { signOut, isAuthenticated } = useAuth();
 
   return (
-    <nav className="max-w-7xl mx-auto flex h-16 list-none justify-between items-center">
+    <nav className="max-w-7xl mx-auto h-16 list-none flex justify-between items-center  bg-zinc-800 px-4 rounded-md">
       <li className="">
-        <Link to={'/'}>mi-licencia</Link>
+        <NavLink to={'/'} className="flex items-center gap-1.5">
+          <img src="/manage.svg" alt="Logo mi-licencia-app" className="h-8" />
+          <span className="text-2xl text-white">MiLicenciaApp</span>
+        </NavLink>
       </li>
       <ul className="flex gap-4">
         {isAuthenticated ? (
           <>
             <li>
-              <Link to="/dashboard">Dashboard</Link>
+              <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
             <li>
-              <Link to="/profile">Perfil</Link>
+              <NavLink to="/profile">Perfil</NavLink>
             </li>
             <li>
               <button onClick={signOut} className="cursor-pointer">
@@ -27,10 +30,10 @@ const NavBar = () => {
         ) : (
           <>
             <li>
-              <Link to="/login">Iniciar sesión</Link>
+              <NavLink to="/login">Iniciar sesión</NavLink>
             </li>
             <li>
-              <Link to="/register">Registrarse</Link>
+              <NavLink to="/register">Registrarse</NavLink>
             </li>
           </>
         )}

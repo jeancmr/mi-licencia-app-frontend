@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
   return (
     <AuthLayout title={'Registrarse'}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="flex flex-col">
         <InputForm
           type="email"
           placeholder="Correo"
@@ -66,13 +66,13 @@ const RegisterPage = () => {
 
         <AuthErrorMessage authError={registerErrors} />
 
-        <button className="bg-indigo-500 px-4 py-1 rounded-sm mt-4 cursor-pointer">
-          Registrar usuario
+        <button className="bg-indigo-500 px-4 py-2 rounded-sm mt-3 cursor-pointer mb-2 hover:bg-indigo-600 transition-colors">
+          Registrar
         </button>
       </form>
 
       <p>
-        ¿Ya tienes una cuenta?
+        ¿Ya tienes una cuenta?{' '}
         <Link to="/login" className="text-blue-500 hover:underline">
           Inicia sesión
         </Link>

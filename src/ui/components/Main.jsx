@@ -1,9 +1,10 @@
 const Main = ({ children }) => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-cyan-700 to-gray-500 py-8">
-      <div className="bg-zinc-800 w-full max-w-4xl px-10 py-12 rounded-md max-h-[80vh] flex flex-col">
-        {children}
-      </div>
+    <div
+      className="max-w-7xl mx-auto py-8"
+      style={{ minHeight: 'calc(100vh - 4rem - 2.5rem)' }} // 4rem = navbar height, 3rem = footer height
+    >
+      <div className="bg-zinc-800 rounded-md flex flex-col px-4 py-6">{children}</div>
     </div>
   );
 };
