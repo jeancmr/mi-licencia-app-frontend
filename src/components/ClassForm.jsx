@@ -12,7 +12,7 @@ const ClassForm = ({ selectedClass, onRemoveClass, onGoBack, onRefreshClasses })
       <BackButton onGoBack={() => onGoBack()} />
 
       <header className="flex items-center justify-between mb-4">
-        <h4 className="text-3xl font-bold">{signatureName}</h4>
+        <h4 className="text-2xl md:text-3xl font-bold">{signatureName}</h4>
 
         {selectedClass?.id && (
           <button
@@ -24,7 +24,7 @@ const ClassForm = ({ selectedClass, onRemoveClass, onGoBack, onRefreshClasses })
         )}
       </header>
 
-      <div className="grid grid-cols-3 mb-3 mx-2 gap-3">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 mb-3 mx-2 gap-3">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="classDate">Fecha de la clase</label>
           <input

@@ -17,7 +17,7 @@ const ProfilePage = () => {
     <section>
       <h1 className="text-2xl font-bold">Perfil</h1>
       <form className="mt-4 text-white" onSubmit={submit}>
-        <div className="grid grid-cols-4 mb-3 mx-2 gap-3">
+        <div className="grid md:grid-cols-4 mb-3 mx-2 gap-3">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="classDate">Nombre</label>
             <input

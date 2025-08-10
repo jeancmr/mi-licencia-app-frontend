@@ -43,7 +43,7 @@ const ManageClassPage = () => {
           <BackButton onGoBack={() => navigate(-1)} />
 
           <header className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold">Administrar Clases</h1>
+            <h1 className="text-2xl md:text-3xl font-bold">Administrar Clases</h1>
           </header>
           <ClassList
             classes={classes}
