@@ -8,7 +8,7 @@ import AttendanceForm from '../components/AttendanceForm';
 const ListAttendancePage = () => {
   const { user } = useAuth();
 
-  const { classes, isLoading } = useClasses('professor', user.user.id, true);
+  const { classes, isLoading } = useClasses('professor', user.id, true);
   const [classSelected, setClassSelected] = useState(null);
   const [openAttendanceForm, setOpenAttendanceForm] = useState(false);
   const [students, setStudents] = useState([]);

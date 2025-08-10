@@ -5,7 +5,7 @@ import { useClasses } from '../../../hooks';
 
 const ListClassesPage = () => {
   const { user } = useAuth();
-  const { classes, isLoading } = useClasses('professor', user.user.id);
+  const { classes, isLoading } = useClasses('professor', user.id);
   const navigate = useNavigate();
 
   if (isLoading) {

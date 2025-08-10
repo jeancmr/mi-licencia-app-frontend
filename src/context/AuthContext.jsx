@@ -25,8 +25,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await login(userData);
       const permissions = rolePermissions[res.user.rol] || [];
-
-      setUser({ ...res, permissions });
+      console.log('message:', res.message);
+      setUser({
+        ...res.user,
+        permissions,
+      });
       setIsAuthenticated(true);
     } catch (error) {
       console.error(error);
@@ -40,9 +43,13 @@ export const AuthProvider = ({ children }) => {
     try {
       setIsLoading(true);
       const res = await verifyToken();
-      console.log('Usuario verificado:', res);
+      console.log('message:', res.message);
+
       const permissions = rolePermissions[res.user.rol] || [];
-      setUser({ ...res, permissions });
+      setUser({
+        ...res.user,
+        permissions,
+      });
       setIsAuthenticated(true);
     } catch (error) {
       setUser(null);
