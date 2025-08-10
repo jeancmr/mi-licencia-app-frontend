@@ -3,11 +3,14 @@ import { Button } from '../../components';
 import { useUserForm } from '../../user/admin/hooks';
 
 const ProfilePage = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const { formData, handleChange, onSubmit } = useUserForm(user);
 
   const submit = async (event) => {
-    await onSubmit(event);
+    const resp = await onSubmit(event);
+    if (resp.success) {
+      updateUser(resp.user);
+    }
   };
 
   return (

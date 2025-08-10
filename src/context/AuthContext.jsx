@@ -65,6 +65,13 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  const updateUser = (updatedUser) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      ...updatedUser,
+    }));
+  };
+
   useEffect(() => {
     verify();
   }, []);
@@ -80,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUp, signIn, signOut, isAuthenticated, isLoading, user, errors }}
+      value={{ signUp, signIn, signOut, updateUser, isAuthenticated, isLoading, user, errors }}
     >
       {children}
     </AuthContext.Provider>

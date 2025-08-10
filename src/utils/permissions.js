@@ -29,10 +29,5 @@ export const rolePermissions = {
       name: 'manage_classes',
       description: 'Gestionar clases',
     },
-    {
-      id: 3,
-      name: 'view_attendance',
-      description: 'Asistencia',
-    },
   ],
 };

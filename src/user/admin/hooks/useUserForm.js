@@ -28,12 +28,14 @@ export const useUserForm = (
     event.preventDefault();
 
     try {
+      let result = null;
+
       if (selectedUser?.id) {
-        const updateUserData = await updateUser(selectedUser.id, formData);
-        onUpdateUser(updateUserData);
+        result = await updateUser(selectedUser.id, formData);
+        onUpdateUser(result);
       } else {
-        const createUser = await register(formData);
-        onCreateUser(createUser);
+        result = await register(formData);
+        onCreateUser(result);
       }
 
       showAlert(
@@ -41,7 +43,7 @@ export const useUserForm = (
         `El usuario ha sido ${selectedUser?.id ? 'actualizado' : 'creado'} correctamente`,
         'success'
       );
-      return { success: true };
+      return { success: true, user: result };
     } catch (error) {
       console.error('Error submitting user form:', error);
       showAlert('Error', error.message ?? 'Ocurrió un error al guardar el usuario', 'error');
