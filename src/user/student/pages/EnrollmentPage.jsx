@@ -11,13 +11,13 @@ const EnrollmentPage = () => {
   const [showEnrolledClasses, setShowEnrolledClasses] = useState(false);
   const navigate = useNavigate();
 
-  const { enrollments, createEnrollment, removeEnrollment } = useEnrollments(user?.user?.id);
+  const { enrollments, createEnrollment, removeEnrollment } = useEnrollments(user?.id);
   const { classes, isLoading: isLoadingClasses, fetchClasses } = useClasses();
   const { selectedClassId, selectClass, register, createSubmitHandler } = useClassSelection();
 
   const handleEnrollmentSubmit = async (formData) => {
     const enrollmentData = {
-      estudianteId: user.user.id,
+      estudianteId: user.id,
       claseId: formData.claseId,
     };
 
