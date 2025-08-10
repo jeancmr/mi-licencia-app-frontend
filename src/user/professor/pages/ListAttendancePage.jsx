@@ -34,7 +34,7 @@ const ListAttendancePage = () => {
         />
       ) : (
         <div>
-          <BackButton onGoBack={() => navigate(-1)} />
+          <BackButton onGoBack={() => navigate(-1)} className="mb-5" />
 
           <ClassList classes={classes} handleClaseClick={handleClassSelected} />
         </div>
