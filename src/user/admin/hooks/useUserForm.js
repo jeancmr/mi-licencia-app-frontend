@@ -3,7 +3,11 @@ import { showAlert } from '../../../utils';
 import { updateUser } from '../../../api';
 import { register } from '../../../auth/api/auth';
 
-export const useUserForm = (selectedUser, onUpdateUser, onCreateUser) => {
+export const useUserForm = (
+  selectedUser = {},
+  onUpdateUser = () => {},
+  onCreateUser = () => {}
+) => {
   const [formData, setFormData] = useState({
     nombre: selectedUser?.nombre || '',
     correo: selectedUser?.correo || '',
@@ -25,9 +29,8 @@ export const useUserForm = (selectedUser, onUpdateUser, onCreateUser) => {
 
     try {
       if (selectedUser?.id) {
-        const updateUserz = await updateUser(selectedUser.id, formData);
-        console.log('Updating user:', updateUserz);
-        onUpdateUser(updateUserz);
+        const updateUserData = await updateUser(selectedUser.id, formData);
+        onUpdateUser(updateUserData);
       } else {
         const createUser = await register(formData);
         onCreateUser(createUser);
