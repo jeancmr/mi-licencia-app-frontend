@@ -10,7 +10,7 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signUp, errors: registerErrors } = useAuth();
+  const { signUp, errors: registerErrors, userIsLoading: isLoading } = useAuth();
   const { alert, onAlert } = useAlert();
 
   const onSubmit = handleSubmit(async (data) => {
@@ -66,8 +66,13 @@ const RegisterPage = () => {
 
         <AuthErrorMessage authError={registerErrors} />
 
-        <button className="bg-indigo-500 px-4 py-2 rounded-sm mt-3 cursor-pointer mb-2 hover:bg-indigo-600 transition-colors">
-          Registrar
+        <button
+          className={`bg-indigo-500 px-4 py-2 rounded-sm mt-3 mb-2 ${
+            isLoading ? 'opacity-50' : 'hover:bg-indigo-600 transition-colors cursor-pointer'
+          }`}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Cargando...' : 'Registrar'}
         </button>
       </form>
 

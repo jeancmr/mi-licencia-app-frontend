@@ -8,10 +8,12 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userIsLoading, setUserIsLoading] = useState(false);
 
   const signUp = async (userData) => {
     try {
+      setUserIsLoading(true);
       const res = await register(userData);
       setErrors([]);
       return true;
@@ -19,10 +21,13 @@ export const AuthProvider = ({ children }) => {
       console.error('Error al registrar el usuario:', error);
       setErrors(error.message.split('|'));
       return false;
+    } finally {
+      setUserIsLoading(false);
     }
   };
   const signIn = async (userData) => {
     try {
+      setUserIsLoading(true);
       const res = await login(userData);
       const permissions = rolePermissions[res.user.rol] || [];
       console.log('message:', res.message);
@@ -36,6 +41,8 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       setIsAuthenticated(false);
       setErrors(error.message.split('|'));
+    } finally {
+      setUserIsLoading(false);
     }
   };
 
@@ -87,7 +94,17 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUp, signIn, signOut, updateUser, isAuthenticated, isLoading, user, errors }}
+      value={{
+        signUp,
+        signIn,
+        signOut,
+        updateUser,
+        isAuthenticated,
+        isLoading,
+        userIsLoading,
+        user,
+        errors,
+      }}
     >
       {children}
     </AuthContext.Provider>

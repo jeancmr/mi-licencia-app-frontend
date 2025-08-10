@@ -10,7 +10,7 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signIn, errors: loginErrors } = useAuth();
+  const { signIn, errors: loginErrors, userIsLoading: isLoading } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
     signIn(data);
@@ -38,8 +38,13 @@ const LoginPage = () => {
 
         <AuthErrorMessage authError={loginErrors} />
 
-        <button className="bg-indigo-500 px-4 py-2 rounded-sm mt-3 cursor-pointer mb-2 hover:bg-indigo-600 transition-colors">
-          Iniciar sesión
+        <button
+          className={`bg-indigo-500 px-4 py-2 rounded-sm mt-3 mb-2 ${
+            isLoading ? 'opacity-50' : 'hover:bg-indigo-600 transition-colors cursor-pointer'
+          }`}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Cargando...' : 'Iniciar sesión'}
         </button>
       </form>
 
