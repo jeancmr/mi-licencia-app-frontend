@@ -30,13 +30,11 @@ const ManageUsersPage = () => {
 
   return (
     <div className="">
-      <BackButton onGoBack={() => navigate(-1)} />
+      <BackButton onGoBack={() => navigate(-1)} className={showForm ? 'hidden' : ''} />
 
-      <header className="flex justify-between items-center mb-6">
+      <header className={`${showForm ? 'hidden' : ''} flex justify-between items-center mb-6`}>
         <h1 className="text-3xl font-bold">Administrar usuarios</h1>
-        <Button className={showForm ? 'hidden' : ''} onClick={() => setShowForm(true)}>
-          Agregar usuario
-        </Button>
+        <Button onClick={() => setShowForm(true)}>Agregar usuario</Button>
       </header>
 
       {(selectedUser?.id || showForm) && (
